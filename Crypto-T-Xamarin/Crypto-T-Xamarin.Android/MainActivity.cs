@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Firebase;
 
 namespace Crypto_T_Xamarin.Android
 {
@@ -19,6 +20,9 @@ namespace Crypto_T_Xamarin.Android
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            
+            FirebaseApp.InitializeApp(Application.Context);
+            
             LoadApplication(new App());
         }
     }

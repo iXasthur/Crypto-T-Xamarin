@@ -1,4 +1,5 @@
 ﻿using System;
+using Crypto_T_Xamarin.lib.api;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,6 +19,15 @@ namespace Crypto_T_Xamarin
         protected override void OnStart()
         {
             // Handle when your app starts
+            new CryptoAssetFirebaseManager().getRemoteAssets((a, b) =>
+            {
+                foreach (var cryptoAsset in a)
+                {
+                    Console.WriteLine(a.Count);
+                }
+
+                return a;
+            });
         }
 
         protected override void OnSleep()
@@ -28,6 +38,15 @@ namespace Crypto_T_Xamarin
         protected override void OnResume()
         {
             // Handle when your app resumes
+            new CryptoAssetFirebaseManager().getRemoteAssets((a, b) =>
+            {
+                foreach (var cryptoAsset in a)
+                {
+                    Console.WriteLine(a.Count);
+                }
+
+                return a;
+            });
         }
     }
 }

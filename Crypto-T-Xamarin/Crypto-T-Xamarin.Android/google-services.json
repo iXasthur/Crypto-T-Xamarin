@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "355716173385",
+    "project_id": "crypto-t-31a73",
+    "storage_bucket": "crypto-t-31a73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355716173385:android:a90805809401a6c5447998",
+        "android_client_info": {
+          "package_name": "com.xcnk.cryptot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355716173385-ebnfj5pl1rcjs7ogjbamnj9ge32ppsip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoheD7q0CnXBRTpEglO0B8Odz-3_IH2hE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355716173385-ebnfj5pl1rcjs7ogjbamnj9ge32ppsip.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "355716173385-npitv3hkvlblhb33mvoeptah8refepc4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.xcnk.crypto-t"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
