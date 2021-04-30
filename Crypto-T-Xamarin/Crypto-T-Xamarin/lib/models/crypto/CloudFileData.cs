@@ -3,6 +3,6 @@
     public struct CloudFileData
     {
         public string path;
-        public string downloadUrl;
+        public string downloadURL;
     }
 }
