@@ -11,11 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace Crypto_T_Xamarin.lib.screens.home
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : ContentPage
+    public partial class HomePage : TabbedPage
     {
         public HomePage()
         {
             InitializeComponent();
+
+            Title = "Crypto-T";
         }
         protected override bool OnBackButtonPressed()
         {

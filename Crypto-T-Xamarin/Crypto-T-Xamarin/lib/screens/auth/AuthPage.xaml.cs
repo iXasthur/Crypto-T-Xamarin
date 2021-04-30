@@ -25,6 +25,8 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             SomethingWentWrongLabel.IsVisible = false;
             EmailEntry.Text = "";
             PasswordEntry.Text = "";
+            
+            Title = "Authorization";
         }
 
         protected override void OnAppearing()

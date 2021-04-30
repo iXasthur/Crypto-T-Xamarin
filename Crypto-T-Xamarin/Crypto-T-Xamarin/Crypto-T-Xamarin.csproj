@@ -22,4 +22,19 @@
     <ItemGroup>
       <None Remove="secrets.json" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="lib\screens\home\tabs\MapPage.xaml.cs">
+        <DependentUpon>MapPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="lib\screens\home\tabs\SettingsPage.xaml.cs">
+        <DependentUpon>SettingsPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="lib\screens\home\tabs\CryptosPage.xaml.cs">
+        <DependentUpon>CryptosPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>
