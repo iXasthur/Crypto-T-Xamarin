@@ -159,23 +159,23 @@ namespace Crypto_T_Xamarin.lib.api
             assets = null;
         }
         
-        // public AuthData? restore(Func<Exception?, Exception?> completion)
-        // {
-        //     var authData = AuthDataStorage.Restore();
-        //     if (authData != null)
-        //     {
-        //         signInEmail(authData.Value.email, authData.Value.password, error =>
-        //         {
-        //             handleFirebaseAuthResponse(authData.Value, error, completion);
-        //             return error;
-        //         });
-        //         return authData;
-        //     } else
-        //     {
-        //         completion(new Exception("Unable to restore session"));
-        //         return null;
-        //     }
-        // }
+        public AuthData? restore(Func<Exception?, Exception?> completion)
+        {
+            var authData = AuthDataStorage.Restore();
+            if (authData != null)
+            {
+                signInEmail(authData.Value.email, authData.Value.password, error =>
+                {
+                    handleFirebaseAuthResponse(authData.Value, error, completion);
+                    return error;
+                });
+                return authData;
+            } else
+            {
+                completion(new Exception("Unable to restore session"));
+                return null;
+            }
+        }
         
         public void signUpEmail(String email, string password, Func<Exception?, Exception?> completion)
         {

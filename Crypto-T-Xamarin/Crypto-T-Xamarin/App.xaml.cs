@@ -14,7 +14,7 @@ namespace Crypto_T_Xamarin
         {
             InitializeComponent();
 
-            MainPage = new AuthPage();
+            MainPage = new NavigationPage(new AuthPage());
         }
 
         protected override void OnStart()

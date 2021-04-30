@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
+using Crypto_T_Xamarin.lib.screens.home;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,13 +23,36 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             InitializeComponent();
 
             SomethingWentWrongLabel.IsVisible = false;
-
-            EmailEntry.Text = "api@example.com";
-            PasswordEntry.Text = "123456";
-            
-            Session.Shared.destroy();
+            EmailEntry.Text = "";
+            PasswordEntry.Text = "";
         }
-        
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var restoredAuthData = Session.Shared.restore(error =>
+            {
+                if (error != null) {
+                    Device.BeginInvokeOnMainThread (() => {
+                        SomethingWentWrongLabel.IsVisible = false;
+                    });
+                } else {
+                    Device.BeginInvokeOnMainThread (() => {
+                        SomethingWentWrongLabel.IsVisible = false;
+                        Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                    });
+                }
+                return error;
+            });
+
+            if (restoredAuthData != null)
+            {
+                EmailEntry.Text = restoredAuthData.Value.email;
+                PasswordEntry.Text = restoredAuthData.Value.password;
+            }
+        }
+
         private void SignIn_OnClicked(object sender, EventArgs e)
         {
             SomethingWentWrongLabel.IsVisible = false;
@@ -39,7 +63,9 @@ namespace Crypto_T_Xamarin.lib.screens.auth
                 {
                     if (error == null)
                     {
-                        
+                        Device.BeginInvokeOnMainThread (() => {
+                            Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                        });
                     }
                     else
                     {
@@ -67,7 +93,9 @@ namespace Crypto_T_Xamarin.lib.screens.auth
                 {
                     if (error == null)
                     {
-                        
+                        Device.BeginInvokeOnMainThread (() => {
+                            Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                        });
                     }
                     else
                     {
