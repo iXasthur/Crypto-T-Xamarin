@@ -12,15 +12,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FirebaseAuthentication.net" Version="4.0.0-alpha.2" />
         <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
         <PackageReference Include="Plugin.CloudFirestore" Version="4.1.0" />
+        <PackageReference Include="Plugin.FirebaseAuth" Version="4.1.0" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
         <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="lib\screens" />
+      <Folder Include="lib\screens\home" />
     </ItemGroup>
 
     <ItemGroup>

@@ -15,6 +15,8 @@ namespace Crypto_T_Xamarin.Android
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
+            
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -22,7 +24,7 @@ namespace Crypto_T_Xamarin.Android
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             
             FirebaseApp.InitializeApp(Application.Context);
-            
+
             LoadApplication(new App());
         }
     }

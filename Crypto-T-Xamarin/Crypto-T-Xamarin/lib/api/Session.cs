@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using Crypto_T_Xamarin.lib.models.auth;
 using Crypto_T_Xamarin.lib.models.crypto;
-using Crypto_T_Xamarin.lib.utils;
-using Firebase.Auth;
-using Firebase.Auth.Providers;
+using Plugin.FirebaseAuth;
 
 namespace Crypto_T_Xamarin.lib.api
 {
     public class Session
     {
-        private FirebaseAuthClient authClient = new FirebaseAuthClient(new FirebaseAuthConfig {ApiKey = Secrets.FirebaseWebApiKey});
+        public static Session Shared = new Session();
         
+        private Session() { }
+
         private AuthData? authData = null;
-        private CryptoDashboard? dashboard = null;
+        private List<CryptoAsset>? assets = null;
         
         private bool initialized = false;
 
@@ -28,7 +28,7 @@ namespace Crypto_T_Xamarin.lib.api
         
         public List<CryptoAsset>? getLocalAssets()
         {
-            return dashboard?.assets;
+            return assets;
         }
         
         public CryptoAsset? getLocalAsset(string id)
@@ -38,7 +38,7 @@ namespace Crypto_T_Xamarin.lib.api
         
         private void deleteLocalAsset(CryptoAsset asset)
         {
-            var removed = dashboard?.assets.Remove(asset);
+            var removed = assets?.Remove(asset);
             if (removed != null && removed.Value && selectedAsset?.id == asset.id)
             {
                 selectedAsset = null;
@@ -64,18 +64,16 @@ namespace Crypto_T_Xamarin.lib.api
         
         private void updateLocalAsset(CryptoAsset asset)
         {
-            if (dashboard == null) return;
-            
             var index = getLocalAssets()?.IndexOf(asset);
             if (index != null && index != -1)
             {
-                dashboard.Value.assets[index.Value] = asset;
+                assets![index.Value] = asset;
                 if (selectedAsset?.id == asset.id)
                 {
                     selectedAsset = asset;
                 }
             } else {
-                dashboard?.assets.Add(asset);
+                assets!.Add(asset);
             }
         }
         
@@ -107,11 +105,11 @@ namespace Crypto_T_Xamarin.lib.api
                 if (error != null)
                 {
                     Console.WriteLine(error);
-                    dashboard?.setAssets(new List<CryptoAsset>());
+                    this.assets = new List<CryptoAsset>();
                     selectedAsset = null;
                 } else if (assets != null)
                 {
-                    dashboard?.setAssets(assets);
+                    this.assets = assets;
                     if (selectedAsset != null)
                     {
                         selectedAsset = getLocalAsset(selectedAsset.Value.id);
@@ -119,7 +117,7 @@ namespace Crypto_T_Xamarin.lib.api
                 } else
                 {
                     Console.WriteLine("Didn't receive assets and error");
-                    dashboard?.setAssets(new List<CryptoAsset>());
+                    this.assets = new List<CryptoAsset>();
                     selectedAsset = null;
                 }
 
@@ -135,7 +133,7 @@ namespace Crypto_T_Xamarin.lib.api
 
             AuthDataStorage.Save(authData);
 
-            dashboard = new CryptoDashboard();
+            assets = new List<CryptoAsset>();
 
             syncDashboard(() =>
             {
@@ -144,13 +142,13 @@ namespace Crypto_T_Xamarin.lib.api
             });
         }
         
-        public async void destroyAsync()
+        public async void destroy()
         {
             initialized = false;
             
             try
             {
-                await authClient!.SignOutAsync();
+                CrossFirebaseAuth.Current.Instance.SignOut();
             } catch (Exception error) {
                 Console.WriteLine(error);
             }
@@ -158,57 +156,44 @@ namespace Crypto_T_Xamarin.lib.api
             AuthDataStorage.Delete();
             selectedAsset = null;
             authData = null;
-            dashboard = null;
+            assets = null;
         }
         
-        public AuthData? restore(Func<Exception?, Exception?> completion)
+        // public AuthData? restore(Func<Exception?, Exception?> completion)
+        // {
+        //     var authData = AuthDataStorage.Restore();
+        //     if (authData != null)
+        //     {
+        //         signInEmail(authData.Value.email, authData.Value.password, error =>
+        //         {
+        //             handleFirebaseAuthResponse(authData.Value, error, completion);
+        //             return error;
+        //         });
+        //         return authData;
+        //     } else
+        //     {
+        //         completion(new Exception("Unable to restore session"));
+        //         return null;
+        //     }
+        // }
+        
+        public void signUpEmail(String email, string password, Func<Exception?, Exception?> completion)
         {
-            var authData = AuthDataStorage.Restore();
-            if (authData != null)
-            {
-                signInEmail(authData.Value.email, authData.Value.password, error =>
-                {
-                    handleFirebaseAuthResponse(authData.Value, error, completion);
-                    return error;
-                });
-                return authData;
-            } else
-            {
-                completion(new Exception("Unable to restore session"));
-                return null;
-            }
-        }
-        
-        public void signUpEmail(String email, string password, Func<Exception?, Exception?> completion) {
-            authClient.CreateUserWithEmailAndPasswordAsync(email, password)
+            CrossFirebaseAuth.Current.Instance.CreateUserWithEmailAndPasswordAsync(email, password)
                 .ContinueWith(task =>
                 {
                     var authData = new AuthData {email = email, password = password};
-                    if (task.IsCompleted)
-                    {
-                        handleFirebaseAuthResponse(authData, null, completion);
-                    }
-                    else
-                    {
-                        handleFirebaseAuthResponse(authData, task.Exception, completion);
-                    }
+                    handleFirebaseAuthResponse(authData, task.Exception, completion);
                 });
         }
         
         public void signInEmail(String email, string password, Func<Exception?, Exception?> completion)
         {
-            authClient.SignInWithEmailAndPasswordAsync(email, password)
+            CrossFirebaseAuth.Current.Instance.SignInWithEmailAndPasswordAsync(email, password)
                 .ContinueWith(task =>
                 {
                     var authData = new AuthData {email = email, password = password};
-                    if (task.IsCompleted)
-                    {
-                        handleFirebaseAuthResponse(authData, null, completion);
-                    }
-                    else
-                    {
-                        handleFirebaseAuthResponse(authData, task.Exception, completion);
-                    }
+                    handleFirebaseAuthResponse(authData, task.Exception, completion);
                 });
         }
         
@@ -220,7 +205,7 @@ namespace Crypto_T_Xamarin.lib.api
             }
 
             initialize(authData, () => {
-                if (this.initialized)
+                if (initialized)
                 {
                     completion(null);
                 } else

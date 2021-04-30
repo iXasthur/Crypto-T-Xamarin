@@ -74,6 +74,7 @@
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.androidx.viewpager/1.0.0.7/aar/androidx.viewpager.viewpager.aar" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.androidx.viewpager2/1.0.0.9/aar/androidx.viewpager2.viewpager2.aar" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.firebase.auth.interop/119.0.2/proguard/MonoAndroid90/proguard.txt" />
+    <content url="file://$USER_HOME$/.nuget/packages/xamarin.firebase.auth/120.0.2/proguard/MonoAndroid90/proguard.txt" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.firebase.common/119.5.0/proguard/MonoAndroid90/proguard.txt" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.firebase.components/116.1.0/proguard/MonoAndroid90/proguard.txt" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.firebase.firestore/122.1.0/proguard/MonoAndroid90/proguard.txt" />
@@ -84,13 +85,16 @@
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.google.guava.listenablefuture/1.0.0.2/buildTransitive/monoandroid50" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.googleplayservices.base/117.6.0/proguard/MonoAndroid90/proguard.txt" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.googleplayservices.basement/117.6.0/proguard/MonoAndroid90" />
+    <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/firebaseauth-20.0.2" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/firebaseauthinterop-19.0.2" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/firebasecommon-19.5.0" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/firebasecomponents-16.1.0" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/firebasedatabasecollection-17.0.1" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/firebasefirestore-22.1.0" />
+    <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/playservicesauthapiphone-17.5.0" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/playservicesbase-17.6.0" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/playservicesbasement-17.6.0" />
+    <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/playservicessafetynet-17.0.0" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/playservicestasks-17.2.1" />
     <content url="file://$USER_HOME$/AppData/Local/XamarinBuildDownloadCache/protolitewellknowntypes-17.1.1" />
     <content url="file://$MODULE_DIR$/../.." />

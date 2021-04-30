@@ -1,5 +1,6 @@
 ﻿using System;
 using Crypto_T_Xamarin.lib.api;
+using Crypto_T_Xamarin.lib.screens.auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +14,7 @@ namespace Crypto_T_Xamarin
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new AuthPage();
         }
 
         protected override void OnStart()
