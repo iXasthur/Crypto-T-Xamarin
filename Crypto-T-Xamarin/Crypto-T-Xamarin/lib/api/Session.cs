@@ -139,7 +139,7 @@ namespace Crypto_T_Xamarin.lib.api
 
             syncDashboard(() =>
             {
-                this.initialized = true;
+                initialized = true;
                 onCompleted();
             });
         }
@@ -161,56 +161,73 @@ namespace Crypto_T_Xamarin.lib.api
             dashboard = null;
         }
         
-        // public void restore(completion: (Exception?) -> Unit): AuthData? {
-        //     val authData = AuthDataStorage.restore()
-        //     if (authData != null) {
-        //         signInEmail(authData.email, authData.password) { error ->
-        //             this.handleFirebaseAuthResponse(authData, error, completion)
-        //         }
-        //         return authData
-        //     } else {
-        //         completion(Exception("Unable to restore session"))
-        //         return null
-        //     }
-        // }
+        public AuthData? restore(Func<Exception?, Exception?> completion)
+        {
+            var authData = AuthDataStorage.Restore();
+            if (authData != null)
+            {
+                signInEmail(authData.Value.email, authData.Value.password, error =>
+                {
+                    handleFirebaseAuthResponse(authData.Value, error, completion);
+                    return error;
+                });
+                return authData;
+            } else
+            {
+                completion(new Exception("Unable to restore session"));
+                return null;
+            }
+        }
         
-        // public void signUpEmail(email: String, password: String, completion: (Exception?) -> Unit) {
-        //     val authData = AuthData(email, password)
-        //     FirebaseAuth.getInstance()
-        //         .createUserWithEmailAndPassword(email, password)
-        //         .addOnSuccessListener { _ ->
-        //             this.handleFirebaseAuthResponse(authData, null, completion)
-        //         }
-        //         .addOnFailureListener { e ->
-        //             this.handleFirebaseAuthResponse(authData, e, completion)
-        //         }
-        // }
+        public void signUpEmail(String email, string password, Func<Exception?, Exception?> completion) {
+            authClient.CreateUserWithEmailAndPasswordAsync(email, password)
+                .ContinueWith(task =>
+                {
+                    var authData = new AuthData {email = email, password = password};
+                    if (task.IsCompleted)
+                    {
+                        handleFirebaseAuthResponse(authData, null, completion);
+                    }
+                    else
+                    {
+                        handleFirebaseAuthResponse(authData, task.Exception, completion);
+                    }
+                });
+        }
         
-        // public void signInEmail(email: String, password: String, completion: (Exception?) -> Unit) {
-        //     val authData = AuthData(email, password)
-        //     FirebaseAuth.getInstance()
-        //         .signInWithEmailAndPassword(email, password)
-        //         .addOnSuccessListener { _ ->
-        //             this.handleFirebaseAuthResponse(authData, null, completion)
-        //         }
-        //         .addOnFailureListener { e ->
-        //             this.handleFirebaseAuthResponse(authData, e, completion)
-        //         }
-        // }
+        public void signInEmail(String email, string password, Func<Exception?, Exception?> completion)
+        {
+            authClient.SignInWithEmailAndPasswordAsync(email, password)
+                .ContinueWith(task =>
+                {
+                    var authData = new AuthData {email = email, password = password};
+                    if (task.IsCompleted)
+                    {
+                        handleFirebaseAuthResponse(authData, null, completion);
+                    }
+                    else
+                    {
+                        handleFirebaseAuthResponse(authData, task.Exception, completion);
+                    }
+                });
+        }
         
-        // private void handleFirebaseAuthResponse(authData: AuthData, error: Exception?, completion: (Exception?) -> Unit) {
-        //     if (error != null) {
-        //         completion(error)
-        //         return
-        //     }
-        //
-        //     initialize(authData) {
-        //         if (this.initialized) {
-        //             completion(null)
-        //         } else {
-        //             completion(Exception("Unable to initialize session"))
-        //         }
-        //     }
-        // }
+        private void handleFirebaseAuthResponse(AuthData authData, Exception? error, Func<Exception?, Exception?> completion) {
+            if (error != null)
+            {
+                completion(error);
+                return;
+            }
+
+            initialize(authData, () => {
+                if (this.initialized)
+                {
+                    completion(null);
+                } else
+                {
+                    completion(new Exception("Unable to initialize session"));
+                }
+            });
+        }
     }
 }
