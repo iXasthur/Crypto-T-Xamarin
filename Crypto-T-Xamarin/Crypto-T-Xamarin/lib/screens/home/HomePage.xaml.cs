@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Crypto_T_Xamarin.lib.screens.creator;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
@@ -22,7 +22,9 @@ namespace Crypto_T_Xamarin.lib.screens.home
             var newCrypto = new ToolbarItem {
                 Command = new Command(() =>
                 {
-                    Console.WriteLine("Creator Call");
+                    Device.BeginInvokeOnMainThread (() => {
+                        Navigation.PushModalAsync(new NavigationPage(new CryptoCreatorPage()));
+                    });
                 }),
                 Text = "New",
                 Priority = 0

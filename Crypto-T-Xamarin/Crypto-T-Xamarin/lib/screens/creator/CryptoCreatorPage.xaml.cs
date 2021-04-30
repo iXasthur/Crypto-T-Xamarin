@@ -15,6 +15,31 @@ namespace Crypto_T_Xamarin.lib.screens.creator
         public CryptoCreatorPage()
         {
             InitializeComponent();
+
+            Title = "Creator";
+            
+            var cancelButton = new ToolbarItem {
+                Command = new Command(() =>
+                {
+                    Device.BeginInvokeOnMainThread (() =>
+                    {
+                        Navigation.PopModalAsync();
+                    });
+                }),
+                Text = "Cancel",
+                Priority = 0
+            };
+            ToolbarItems.Add(cancelButton);
+            
+            var saveButton = new ToolbarItem {
+                Command = new Command(() =>
+                {
+                    Console.WriteLine("Save");
+                }),
+                Text = "Save",
+                Priority = 0
+            };
+            ToolbarItems.Add(saveButton);
         }
     }
 }
