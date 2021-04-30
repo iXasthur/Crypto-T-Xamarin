@@ -17,6 +17,23 @@ namespace Crypto_T_Xamarin.lib.screens.home
         {
             InitializeComponent();
         }
-
+        protected override bool OnBackButtonPressed()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                DependencyService.Get<IOnBackPressed>().CloseApp();
+                return true;
+            }
+            else
+            {
+                return base.OnBackButtonPressed();
+            }
+        }
     }
 }
+
+public interface IOnBackPressed
+{
+    void CloseApp();
+}
+

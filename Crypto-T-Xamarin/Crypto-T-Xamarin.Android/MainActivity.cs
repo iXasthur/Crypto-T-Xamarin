@@ -5,7 +5,24 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Support.V7.App;
 using Firebase;
+using Mobile.Droid;
+using Xamarin.Forms;
+using Application = Android.App.Application;
+
+[assembly: Xamarin.Forms.Dependency(typeof(OnBackPressed))]
+namespace Mobile.Droid
+{
+    class OnBackPressed : AppCompatActivity, IOnBackPressed
+    {
+        public void CloseApp()
+        {
+            var activity = (Activity)Forms.Context;
+            activity.FinishAffinity();
+        }
+    }
+}
 
 namespace Crypto_T_Xamarin.Android
 {
