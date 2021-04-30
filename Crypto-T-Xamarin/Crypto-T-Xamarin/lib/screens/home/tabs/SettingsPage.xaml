@@ -5,9 +5,7 @@
              x:Class="Crypto_T_Xamarin.lib.screens.home.tabs.SettingsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Settings"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <Button Text="Sign Out" Clicked="SignOut_OnClicked" HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

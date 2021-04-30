@@ -55,6 +55,14 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             }
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            
+            EmailEntry.Text = "";
+            PasswordEntry.Text = "";
+        }
+
         private void SignIn_OnClicked(object sender, EventArgs e)
         {
             SomethingWentWrongLabel.IsVisible = false;
