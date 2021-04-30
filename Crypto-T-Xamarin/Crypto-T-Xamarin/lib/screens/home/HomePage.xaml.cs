@@ -18,6 +18,17 @@ namespace Crypto_T_Xamarin.lib.screens.home
             InitializeComponent();
 
             Title = "Crypto-T";
+
+            var newCrypto = new ToolbarItem {
+                Command = new Command(() =>
+                {
+                    Console.WriteLine("Creator Call");
+                }),
+                Text = "New",
+                Priority = 0
+            } ;
+
+            ToolbarItems.Add(newCrypto);
         }
         protected override bool OnBackButtonPressed()
         {

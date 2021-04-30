@@ -13,9 +13,7 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CryptosPage : ContentPage
     {
-        
-        private List<string> _cryptoNames = new List<string>();
-        
+
         private TableView _tableView = new TableView { Intent = TableIntent.Form };
         
         public CryptosPage()
@@ -57,7 +55,11 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
                     // Some differences with loading images in initial release.
                     ImageSource = ImageSource.FromUri(imageUri),
                     Text = asset.name,
-                    Detail = asset.code
+                    Detail = asset.code,
+                    Command = new Command(() =>
+                    {
+                        Console.WriteLine(asset.name);
+                    })
                 });
             });
 
@@ -69,11 +71,6 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
                 }
             };
             
-        }
-
-        private void CryptosListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            ((ListView)sender).SelectedItem = null;
         }
     }
 }
