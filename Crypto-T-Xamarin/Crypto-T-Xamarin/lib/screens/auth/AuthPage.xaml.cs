@@ -16,6 +16,8 @@ namespace Crypto_T_Xamarin.lib.screens.auth
     public partial class AuthPage : ContentPage
     {
 
+        private bool _onAppearCalledOnce = false;
+        
         private string email => EmailEntry.Text;
         private string password => PasswordEntry.Text;
 
@@ -27,40 +29,48 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             EmailEntry.Text = "";
             PasswordEntry.Text = "";
             
-            Title = "Authorization";
-            
-            RL.OnLanguageChange += (o, e) =>
-            {
-                Device.BeginInvokeOnMainThread (() => {
-                    Navigation.PopModalAsync()
-                        .ContinueWith(task =>
-                        {
-                            Device.BeginInvokeOnMainThread (() => {
-                                Navigation.PushModalAsync(new NavigationPage(new HomePage()));
-                            });
-                        });
-                });
-            };
-            
-            var restoredAuthData = Session.Shared.restore(error =>
-            {
-                if (error != null) {
-                    Device.BeginInvokeOnMainThread (() => {
-                        SomethingWentWrongLabel.IsVisible = false;
-                    });
-                } else {
-                    Device.BeginInvokeOnMainThread (() => {
-                        SomethingWentWrongLabel.IsVisible = false;
-                        Navigation.PushModalAsync(new NavigationPage(new HomePage()));
-                    });
-                }
-                return error;
-            });
+            Title = RL.L("Authorization");
+        }
 
-            if (restoredAuthData != null)
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (!_onAppearCalledOnce)
             {
-                EmailEntry.Text = restoredAuthData.Value.email;
-                PasswordEntry.Text = restoredAuthData.Value.password;
+                _onAppearCalledOnce = true;
+            }
+            else
+            {
+                return;
+            }
+            
+            if (Session.Shared.isInitialized())
+            {
+                Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+            }
+            else
+            {
+                var restoredAuthData = Session.Shared.restore(error =>
+                {
+                    if (error != null) {
+                        Device.BeginInvokeOnMainThread (() => {
+                            SomethingWentWrongLabel.IsVisible = false;
+                        });
+                    } else {
+                        Device.BeginInvokeOnMainThread (() => {
+                            SomethingWentWrongLabel.IsVisible = false;
+                            Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                        });
+                    }
+                    return error;
+                });
+
+                if (restoredAuthData != null)
+                {
+                    EmailEntry.Text = restoredAuthData.Value.email;
+                    PasswordEntry.Text = restoredAuthData.Value.password;
+                }
             }
         }
 

@@ -3,6 +3,7 @@ using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.screens.auth;
 using Crypto_T_Xamarin.lib.screens.home;
 using RedCorners.Forms.Localization;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,8 +16,17 @@ namespace Crypto_T_Xamarin
         public App()
         {
             RL.Load(typeof(App), "Crypto_T_Xamarin.", ".trans.json");
-
+            
             InitializeComponent();
+            
+            RL.SetLanguage(Preferences.Get("lang", "En"));
+            
+            RL.OnLanguageChange += (o, e) =>
+            {
+                Device.BeginInvokeOnMainThread (() => {
+                    MainPage = new NavigationPage(new AuthPage());
+                });
+            };
 
             MainPage = new NavigationPage(new AuthPage());
         }

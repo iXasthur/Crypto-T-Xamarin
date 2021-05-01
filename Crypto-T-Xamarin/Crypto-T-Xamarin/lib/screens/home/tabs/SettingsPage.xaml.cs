@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
 using RedCorners.Forms.Localization;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -41,16 +42,19 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         
         private void LanguageAuto_OnClicked(object sender, EventArgs e)
         {
+            Preferences.Remove("lang");
             RL.SetLanguage("En");
         }
         
         private void LanguageEnglish_OnClicked(object sender, EventArgs e)
         {
+            Preferences.Set("lang", "En");
             RL.SetLanguage("En");
         }
         
         private void LanguageRussian_OnClicked(object sender, EventArgs e)
         {
+            Preferences.Set("lang", "Ru");
             RL.SetLanguage("Ru");
         }
     }

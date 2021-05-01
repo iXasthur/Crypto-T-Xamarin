@@ -2,20 +2,21 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
              x:Class="Crypto_T_Xamarin.lib.screens.auth.AuthPage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Crypto-T-Xamarin" FontSize="Title" HorizontalOptions="Center" />
             <Entry x:Name="EmailEntry"
                    Text=""
-                   Placeholder="Username" />
+                   Placeholder="{localization:RL Email}" />
             <Entry x:Name="PasswordEntry"
                    Text=""
-                   Placeholder="Password"
+                   Placeholder="{localization:RL Password}"
                    IsPassword="True" />
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Button Text="Sign In" Clicked="SignIn_OnClicked" HorizontalOptions="FillAndExpand" />
-                <Button Text="Sign Up" Clicked="SignUp_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="{localization:RL SignIn}" Clicked="SignIn_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="{localization:RL SignUp}" Clicked="SignUp_OnClicked" HorizontalOptions="FillAndExpand" />
             </StackLayout>
             <Label
                 x:Name="SomethingWentWrongLabel"
