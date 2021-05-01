@@ -5,9 +5,15 @@
              x:Class="Crypto_T_Xamarin.lib.screens.creator.CryptoCreatorPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Creator"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="NameEntry"
+                   Text=""
+                   Placeholder="Name" />
+            <Entry x:Name="CodeEntry"
+                   Text=""
+                   Placeholder="Code" />
+            <Entry x:Name="DescriptionEntry"
+                   Text=""
+                   Placeholder="Description" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

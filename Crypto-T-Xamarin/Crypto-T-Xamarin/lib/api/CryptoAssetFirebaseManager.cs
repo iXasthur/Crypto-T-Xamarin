@@ -159,7 +159,8 @@ namespace Crypto_T_Xamarin.lib.api
             // }
         }
         
-        private async void uploadAsset(CryptoAsset asset, Func<Exception?, Exception?> completion) {
+        private async void uploadAsset(CryptoAsset asset, Func<Exception?, Exception?> completion)
+        {
             var document = db.Collection(Constants.Api.Firebase.assetsCollectionName).Document(asset.id);
             await document
                 .SetAsync(asset)
@@ -331,6 +332,10 @@ namespace Crypto_T_Xamarin.lib.api
                 foreach (var document in value.Documents)
                 {
                     var asset = document.ToObject<CryptoAsset>();
+                    if (asset.id == null) // true for old assets from Native iOS and Android
+                    {
+                        asset.id = document.Id;
+                    }
                     assets.Add(asset);
                 }
 
