@@ -6,7 +6,8 @@
              xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
              x:Class="Crypto_T_Xamarin.lib.screens.creator.CryptoCreatorPage">
     <ContentPage.Content>
-        <ScrollView>
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" >
             <StackLayout Padding="20">
                 <Label Text="{localization:RL Name}" Padding="0, 10" />
                 <Entry x:Name="NameEntry"
@@ -52,5 +53,12 @@
                 <Button x:Name="DeleteEventButton" Text="{localization:RL Delete}" Clicked="DeleteEvent_OnClicked" Margin="20, 0"/>
             </StackLayout>
         </ScrollView>
+            <ActivityIndicator
+                x:Name="ActivityIndicatorView"
+                AbsoluteLayout.LayoutBounds="0.5, 0.5, -1, -1"     
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                IsRunning="True"
+            />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

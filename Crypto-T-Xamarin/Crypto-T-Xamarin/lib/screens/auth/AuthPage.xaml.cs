@@ -28,8 +28,12 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             
             Title = RL.L("Authorization");
             
+            startAnimation();
+            
             var restoredAuthData = Session.Shared.restore(error =>
             {
+                stopAnimation();
+                
                 if (error != null) {
                     Device.BeginInvokeOnMainThread (() => {
                         SomethingWentWrongLabel.IsVisible = false;
@@ -48,6 +52,10 @@ namespace Crypto_T_Xamarin.lib.screens.auth
                 EmailEntry.Text = restoredAuthData.Value.email;
                 PasswordEntry.Text = restoredAuthData.Value.password;
             }
+            else
+            {
+                stopAnimation();
+            }
         }
 
         protected override void OnDisappearing()
@@ -61,11 +69,15 @@ namespace Crypto_T_Xamarin.lib.screens.auth
         private void SignIn_OnClicked(object sender, EventArgs e)
         {
             SomethingWentWrongLabel.IsVisible = false;
-            
+
             if (ValidateInput())
             {
+                startAnimation();
+
                 Session.Shared.signInEmail(email, password, error =>
                 {
+                    stopAnimation();
+                    
                     if (error == null)
                     {
                         Device.BeginInvokeOnMainThread (() => {
@@ -94,8 +106,12 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             
             if (ValidateInput())
             {
+                startAnimation();
+
                 Session.Shared.signUpEmail(email, password, error =>
                 {
+                    stopAnimation();
+                    
                     if (error == null)
                     {
                         Device.BeginInvokeOnMainThread (() => {
@@ -125,6 +141,22 @@ namespace Crypto_T_Xamarin.lib.screens.auth
                 return true;
             }
             return false;
+        }
+
+        private void startAnimation()
+        {
+            Device.BeginInvokeOnMainThread (() => {
+                ActivityIndicatorView.IsRunning = true;
+                Content.IsEnabled = false;
+            });
+        }
+        
+        private void stopAnimation()
+        {
+            Device.BeginInvokeOnMainThread (() => {
+                ActivityIndicatorView.IsRunning = false;
+                Content.IsEnabled = true;
+            });
         }
     }
 }

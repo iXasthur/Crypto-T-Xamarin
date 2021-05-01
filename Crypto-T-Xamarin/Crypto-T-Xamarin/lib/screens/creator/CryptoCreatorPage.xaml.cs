@@ -61,6 +61,8 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             CreateMenuButtons();
             
             UpdateMediaUI();
+            
+            stopAnimation();
         }
         
         public CryptoCreatorPage()
@@ -70,6 +72,8 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             CreateMenuButtons();
             
             UpdateMediaUI();
+            
+            stopAnimation();
         }
 
         private void CreateMenuButtons()
@@ -80,8 +84,12 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                 {
                     Command = new Command(() =>
                     {
+                        startAnimation();
+                        
                         Session.Shared.deleteRemoteAsset(_assetToEdit.Value, error =>
                         {
+                            stopAnimation();
+                            
                             if (error == null)
                             {
                                 Device.BeginInvokeOnMainThread (() =>
@@ -143,8 +151,12 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                             asset.suggestedEvent = null;
                         }
                         
+                        startAnimation();
+                        
                         Session.Shared.updateRemoteAsset(asset, iconUri, videoUri, error =>
                         {
+                            stopAnimation();
+                            
                             if (error == null)
                             {
                                 Device.BeginInvokeOnMainThread (() =>
@@ -282,6 +294,29 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             
             CryptoVideo.Pause();
             CryptoVideo.IsVisible = false;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return ActivityIndicatorView.IsRunning;
+        }
+
+        private void startAnimation()
+        {
+            Device.BeginInvokeOnMainThread (() => {
+                NavigationPage.SetHasBackButton(this, false);
+                ActivityIndicatorView.IsRunning = true;
+                Content.IsEnabled = false;
+            });
+        }
+        
+        private void stopAnimation()
+        {
+            Device.BeginInvokeOnMainThread (() => {
+                NavigationPage.SetHasBackButton(this, true);
+                ActivityIndicatorView.IsRunning = false;
+                Content.IsEnabled = true;
+            });
         }
     }
 }
