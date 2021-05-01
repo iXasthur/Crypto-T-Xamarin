@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.models.crypto;
 using Crypto_T_Xamarin.lib.screens.creator;
+using Crypto_T_Xamarin.lib.utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -44,6 +45,16 @@ namespace Crypto_T_Xamarin.lib.screens.details
 
         private void UpdateDetailsUi(CryptoAsset asset)
         {
+            var imageUri = Constants.DefaultIconURI;
+                
+            if (asset.iconFileData?.downloadURL != null)
+            {
+                imageUri = new Uri(asset.iconFileData.Value.downloadURL);
+            }
+
+            CryptoImage.Source = ImageSource.FromUri(imageUri);
+            CryptoImage.MinimumHeightRequest = 100;
+            CryptoImage.HeightRequest = 100;
             CryptoNameLabel.Text = asset.name;
             CryptoCodeLabel.Text = asset.code;
             CryptoDescriptionLabel.Text = asset.description;

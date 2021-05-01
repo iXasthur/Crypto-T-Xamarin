@@ -9,6 +9,7 @@
             <Label x:Name="CryptoNameLabel" />
             <Label x:Name="CryptoCodeLabel" />
             <Label x:Name="CryptoDescriptionLabel" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

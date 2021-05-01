@@ -66,7 +66,6 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
                 
                 cells.Add(new ImageCell
                 {
-                    // Some differences with loading images in initial release.
                     ImageSource = ImageSource.FromUri(imageUri),
                     Text = asset.name,
                     Detail = asset.code,
