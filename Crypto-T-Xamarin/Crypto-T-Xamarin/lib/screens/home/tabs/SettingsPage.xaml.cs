@@ -44,6 +44,7 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         private void LanguageAuto_OnClicked(object sender, EventArgs e)
         {
             Preferences.Remove("lang");
+            HomePage.SavedPageIndex = 2;
             RL.SetLanguage("En");
             Application.Current.MainPage = new NavigationPage(new HomePage());
         }
@@ -51,6 +52,7 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         private void LanguageEnglish_OnClicked(object sender, EventArgs e)
         {
             Preferences.Set("lang", "En");
+            HomePage.SavedPageIndex = 2;
             RL.SetLanguage("En");
             Application.Current.MainPage = new NavigationPage(new HomePage());
         }
@@ -58,6 +60,7 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         private void LanguageRussian_OnClicked(object sender, EventArgs e)
         {
             Preferences.Set("lang", "Ru");
+            HomePage.SavedPageIndex = 2;
             RL.SetLanguage("Ru");
             Application.Current.MainPage = new NavigationPage(new HomePage());
         }

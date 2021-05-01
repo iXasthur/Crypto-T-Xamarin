@@ -14,12 +14,18 @@ namespace Crypto_T_Xamarin.lib.screens.home
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : TabbedPage
     {
+        public static int SavedPageIndex = 0;
+        
         public HomePage()
         {
             InitializeComponent();
 
             Title = "Crypto-T";
+
+            TabbedPager.CurrentPage = TabbedPager.Children[SavedPageIndex];
+            SavedPageIndex = 0;
         }
+
         protected override bool OnBackButtonPressed()
         {
             if (Device.RuntimePlatform == Device.Android)

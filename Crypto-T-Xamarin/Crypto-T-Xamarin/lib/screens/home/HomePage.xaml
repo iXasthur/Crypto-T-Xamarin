@@ -6,7 +6,8 @@
             android:TabbedPage.IsSwipePagingEnabled="False"
             xmlns:local="clr-namespace:Crypto_T_Xamarin.lib.screens.home.tabs;assembly=Crypto-T-Xamarin"
             xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
-            x:Class="Crypto_T_Xamarin.lib.screens.home.HomePage">
+            x:Class="Crypto_T_Xamarin.lib.screens.home.HomePage"
+            x:Name="TabbedPager">
     <TabbedPage.Children>
         <local:CryptosPage Title="{localization:RL Cryptos}"/>
         <local:MapPage Title="{localization:RL Map}"/>
