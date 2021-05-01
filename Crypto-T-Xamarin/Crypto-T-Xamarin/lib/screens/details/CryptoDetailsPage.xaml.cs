@@ -55,9 +55,7 @@ namespace Crypto_T_Xamarin.lib.screens.details
             }
 
             CryptoImage.Source = ImageSource.FromUri(imageUri);
-            CryptoImage.MinimumHeightRequest = 100;
-            CryptoImage.HeightRequest = 100;
-            
+
             if (asset.videoFileData?.downloadURL != null)
             {
                 CryptoVideo.Source = asset.videoFileData.Value.downloadURL;

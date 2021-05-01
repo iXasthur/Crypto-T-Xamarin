@@ -44,6 +44,8 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             Title = "Edit Crypto";
             
             CreateMenuButtons();
+            
+            UpdateMediaUI();
         }
         
         public CryptoCreatorPage()
@@ -51,6 +53,8 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             InitializeComponent();
             Title = "New Crypto";
             CreateMenuButtons();
+            
+            UpdateMediaUI();
         }
 
         private void CreateMenuButtons()
@@ -143,6 +147,66 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                 return true;
             }
             return false;
+        }
+
+        private void UpdateMediaUI()
+        {
+            if (iconUri != null)
+            {
+                CryptoImage.Source = iconUri;
+                CryptoImage.IsVisible = true;
+                DeleteImageButton.IsVisible = true;
+            }
+            else
+            {
+                CryptoImage.Source = null;
+                CryptoImage.IsVisible = false;
+                DeleteImageButton.IsVisible = false;
+            }
+
+            if (videoUri != null)
+            {
+                CryptoVideo.Source = videoUri;
+                CryptoVideo.IsVisible = true;
+                DeleteVideoButton.IsVisible = true;
+            }
+            else
+            {
+                CryptoVideo.Source = null;
+                CryptoVideo.Pause();
+                CryptoVideo.IsVisible = false;
+                DeleteVideoButton.IsVisible = false;
+            }
+        }
+
+        private void SelectImage_OnClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        
+        private void DeleteImage_OnClicked(object sender, EventArgs e)
+        {
+            iconUri = null;
+            UpdateMediaUI();
+        }
+        
+        private void SelectVideo_OnClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        
+        private void DeleteVideo_OnClicked(object sender, EventArgs e)
+        {
+            videoUri = null;
+            UpdateMediaUI();
+        }
+        
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            
+            CryptoVideo.Pause();
+            CryptoVideo.IsVisible = false;
         }
     }
 }

@@ -6,14 +6,15 @@
              x:Class="Crypto_T_Xamarin.lib.screens.details.CryptoDetailsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Image x:Name="CryptoImage" />
+            <Image x:Name="CryptoImage" HeightRequest="100" />
             <Label x:Name="CryptoNameLabel" />
             <Label x:Name="CryptoCodeLabel" />
             <Label x:Name="CryptoDescriptionLabel" />
-            <StackLayout Orientation="Horizontal" HeightRequest="200">
+            <StackLayout Orientation="Horizontal">
                 <o:VideoPlayer
                     x:Name="CryptoVideo"
                     FillMode="ResizeAspect"
+                    HeightRequest="200"
                 />
             </StackLayout>
             <Label x:Name="CryptoEventLatitudeLabel"/>
