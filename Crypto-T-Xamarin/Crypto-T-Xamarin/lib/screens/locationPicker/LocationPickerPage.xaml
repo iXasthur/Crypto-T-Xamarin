@@ -5,21 +5,40 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="Crypto_T_Xamarin.lib.screens.locationPicker.LocationPickerPage">
     <ContentPage.Content>
-        <maps:Map x:Name="GoogleMap">
-            <x:Arguments>
-                <maps:MapSpan>
-                    <x:Arguments>
-                        <maps:Position>
-                            <x:Arguments>
-                                <x:Double>0</x:Double>
-                                <x:Double>0</x:Double>
-                            </x:Arguments>
-                        </maps:Position>
-                        <x:Double>120</x:Double>
-                        <x:Double>120</x:Double>
-                    </x:Arguments>
-                </maps:MapSpan>
-            </x:Arguments>
-        </maps:Map>
+        <AbsoluteLayout 
+            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            
+            <maps:Map 
+                x:Name="GoogleMap"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
+                AbsoluteLayout.LayoutFlags="All"
+                >
+                <x:Arguments>
+                    <maps:MapSpan>
+                        <x:Arguments>
+                            <maps:Position>
+                                <x:Arguments>
+                                    <x:Double>0</x:Double>
+                                    <x:Double>0</x:Double>
+                                </x:Arguments>
+                            </maps:Position>
+                            <x:Double>120</x:Double>
+                            <x:Double>120</x:Double>
+                        </x:Arguments>
+                    </maps:MapSpan>
+                </x:Arguments>
+            </maps:Map>
+
+            <Label 
+                AbsoluteLayout.LayoutBounds="0.5, 0.5, -1, -1"     
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Text="+"
+                FontSize="40" 
+                TextColor="Blue"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                />
+        </AbsoluteLayout>
+        
     </ContentPage.Content>
 </ContentPage>
