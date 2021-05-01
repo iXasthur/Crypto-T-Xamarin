@@ -7,6 +7,8 @@ using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.models.crypto;
 using Crypto_T_Xamarin.lib.screens.creator;
 using Crypto_T_Xamarin.lib.utils;
+using Octane.Xamarin.Forms.VideoPlayer;
+using Octane.Xamarin.Forms.VideoPlayer.Constants;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -55,9 +57,25 @@ namespace Crypto_T_Xamarin.lib.screens.details
             CryptoImage.Source = ImageSource.FromUri(imageUri);
             CryptoImage.MinimumHeightRequest = 100;
             CryptoImage.HeightRequest = 100;
+            
+            if (asset.videoFileData?.downloadURL != null)
+            {
+                CryptoVideo.Source = asset.videoFileData.Value.downloadURL;
+                CryptoVideo.IsVisible = true;
+            }
+            else
+            {
+                CryptoVideo.IsVisible = false;
+            }
+            
+            
             CryptoNameLabel.Text = asset.name;
             CryptoCodeLabel.Text = asset.code;
             CryptoDescriptionLabel.Text = asset.description;
+
+            CryptoEventLatitudeLabel.Text = asset.suggestedEvent?.latitude;
+            CryptoEventLongitudeLabel.Text = asset.suggestedEvent?.longitude;
+            CryptoEventNoteLabel.Text = asset.suggestedEvent?.note;
             
             ToolbarItems.Clear();
             
@@ -73,6 +91,14 @@ namespace Crypto_T_Xamarin.lib.screens.details
             } ;
 
             ToolbarItems.Add(editCrypto);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            
+            CryptoVideo.Pause();
+            CryptoVideo.IsVisible = false;
         }
     }
 }

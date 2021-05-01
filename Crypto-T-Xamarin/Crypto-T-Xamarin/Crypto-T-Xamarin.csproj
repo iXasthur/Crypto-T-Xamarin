@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+        <PackageReference Include="Octane.Xam.VideoPlayer" Version="3.1.0" />
         <PackageReference Include="Plugin.CloudFirestore" Version="4.1.0" />
         <PackageReference Include="Plugin.FirebaseAuth" Version="4.1.0" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />

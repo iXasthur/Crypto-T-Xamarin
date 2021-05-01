@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              x:Class="Crypto_T_Xamarin.lib.screens.details.CryptoDetailsPage">
     <ContentPage.Content>
         <StackLayout>
@@ -9,7 +10,15 @@
             <Label x:Name="CryptoNameLabel" />
             <Label x:Name="CryptoCodeLabel" />
             <Label x:Name="CryptoDescriptionLabel" />
-            
+            <StackLayout Orientation="Horizontal" HeightRequest="200">
+                <o:VideoPlayer
+                    x:Name="CryptoVideo"
+                    FillMode="ResizeAspect"
+                />
+            </StackLayout>
+            <Label x:Name="CryptoEventLatitudeLabel"/>
+            <Label x:Name="CryptoEventLongitudeLabel" />
+            <Label x:Name="CryptoEventNoteLabel" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
