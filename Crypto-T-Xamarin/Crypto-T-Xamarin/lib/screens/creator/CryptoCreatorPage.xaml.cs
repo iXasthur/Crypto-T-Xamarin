@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.models.crypto;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -153,7 +155,7 @@ namespace Crypto_T_Xamarin.lib.screens.creator
         {
             if (iconUri != null)
             {
-                CryptoImage.Source = iconUri;
+                CryptoImage.Source = iconUri.Scheme == "file" ? ImageSource.FromFile(iconUri.AbsolutePath) : iconUri;
                 CryptoImage.IsVisible = true;
                 DeleteImageButton.IsVisible = true;
             }
@@ -179,9 +181,15 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             }
         }
 
-        private void SelectImage_OnClicked(object sender, EventArgs e)
+        private async void SelectImage_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            await CrossMedia.Current.Initialize();
+            var file = await CrossMedia.Current.PickPhotoAsync();
+            if (file != null)
+            {
+                iconUri = new Uri(file.Path);
+                UpdateMediaUI();
+            }
         }
         
         private void DeleteImage_OnClicked(object sender, EventArgs e)
@@ -190,9 +198,15 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             UpdateMediaUI();
         }
         
-        private void SelectVideo_OnClicked(object sender, EventArgs e)
+        private async void SelectVideo_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            await CrossMedia.Current.Initialize();
+            var file = await CrossMedia.Current.PickVideoAsync();
+            if (file != null)
+            {
+                videoUri = new Uri(file.Path);
+                UpdateMediaUI();
+            }
         }
         
         private void DeleteVideo_OnClicked(object sender, EventArgs e)
