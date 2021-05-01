@@ -2,12 +2,24 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="Crypto_T_Xamarin.lib.screens.home.tabs.MapPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Map"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <maps:Map x:Name="GoogleMap">
+            <x:Arguments>
+                <maps:MapSpan>
+                    <x:Arguments>
+                        <maps:Position>
+                            <x:Arguments>
+                                <x:Double>0</x:Double>
+                                <x:Double>0</x:Double>
+                            </x:Arguments>
+                        </maps:Position>
+                        <x:Double>120</x:Double>
+                        <x:Double>120</x:Double>
+                    </x:Arguments>
+                </maps:MapSpan>
+            </x:Arguments>
+        </maps:Map>
     </ContentPage.Content>
 </ContentPage>
