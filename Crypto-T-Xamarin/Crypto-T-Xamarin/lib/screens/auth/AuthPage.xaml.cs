@@ -27,12 +27,7 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             PasswordEntry.Text = "";
             
             Title = "Authorization";
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
+            
             var restoredAuthData = Session.Shared.restore(error =>
             {
                 if (error != null) {
