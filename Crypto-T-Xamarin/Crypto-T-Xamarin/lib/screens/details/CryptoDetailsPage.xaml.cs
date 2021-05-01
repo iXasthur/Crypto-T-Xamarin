@@ -9,6 +9,7 @@ using Crypto_T_Xamarin.lib.screens.creator;
 using Crypto_T_Xamarin.lib.utils;
 using Octane.Xamarin.Forms.VideoPlayer;
 using Octane.Xamarin.Forms.VideoPlayer.Constants;
+using RedCorners.Forms.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,7 +26,7 @@ namespace Crypto_T_Xamarin.lib.screens.details
             InitializeComponent();
             
             _assetId = asset.id;
-            Title = "Details";
+            Title = RL.L("Details");
             
             UpdateDetailsUi(asset);
         }
@@ -84,7 +85,7 @@ namespace Crypto_T_Xamarin.lib.screens.details
                         Navigation.PushAsync(new CryptoCreatorPage(asset));
                     });
                 }),
-                Text = "Edit",
+                Text = RL.L("Edit"),
                 Priority = 0
             } ;
 

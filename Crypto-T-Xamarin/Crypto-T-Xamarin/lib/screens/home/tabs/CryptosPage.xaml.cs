@@ -7,6 +7,7 @@ using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.screens.creator;
 using Crypto_T_Xamarin.lib.screens.details;
 using Crypto_T_Xamarin.lib.utils;
+using RedCorners.Forms.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -38,7 +39,7 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
                         Navigation.PushAsync(new CryptoCreatorPage());
                     });
                 }),
-                Text = "New",
+                Text = RL.L("New"),
                 Priority = 0
             } ;
 

@@ -40,4 +40,11 @@
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="En.trans.json" />
+      <EmbeddedResource Include="En.trans.json" />
+      <None Remove="Ru.trans.json" />
+      <EmbeddedResource Include="Ru.trans.json" />
+    </ItemGroup>
 </Project>

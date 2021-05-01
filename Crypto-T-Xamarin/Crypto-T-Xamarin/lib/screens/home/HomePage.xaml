@@ -5,10 +5,11 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.IsSwipePagingEnabled="False"
             xmlns:local="clr-namespace:Crypto_T_Xamarin.lib.screens.home.tabs;assembly=Crypto-T-Xamarin"
+            xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
             x:Class="Crypto_T_Xamarin.lib.screens.home.HomePage">
     <TabbedPage.Children>
-        <local:CryptosPage Title="Cryptos"/>
-        <local:MapPage Title="Map"/>
-        <local:SettingsPage Title="Settings"/>
+        <local:CryptosPage Title="{localization:RL Cryptos}"/>
+        <local:MapPage Title="{localization:RL Map}"/>
+        <local:SettingsPage Title="{localization:RL Settings}"/>
     </TabbedPage.Children>
 </TabbedPage>

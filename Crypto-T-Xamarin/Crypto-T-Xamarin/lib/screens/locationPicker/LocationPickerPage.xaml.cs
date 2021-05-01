@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using RedCorners.Forms.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -22,7 +22,7 @@ namespace Crypto_T_Xamarin.lib.screens.locationPicker
             this.completion = completion;
             InitializeComponent();
 
-            Title = "Pick Location";
+            Title = RL.L("PickLocation");
             
             var cancelButton = new ToolbarItem
             {
@@ -33,7 +33,7 @@ namespace Crypto_T_Xamarin.lib.screens.locationPicker
                         Navigation.PopModalAsync();
                     });
                 }),
-                Text = "Cancel",
+                Text = RL.L("Cancel"),
                 Priority = 0
             };
             ToolbarItems.Add(cancelButton);
@@ -48,7 +48,7 @@ namespace Crypto_T_Xamarin.lib.screens.locationPicker
                         Navigation.PopModalAsync();
                     });
                 }),
-                Text = "Pick",
+                Text = RL.L("Pick"),
                 Priority = 0
             };
             ToolbarItems.Add(pickButton);

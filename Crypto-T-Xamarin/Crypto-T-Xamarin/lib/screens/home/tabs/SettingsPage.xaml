@@ -2,20 +2,21 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
              x:Class="Crypto_T_Xamarin.lib.screens.home.tabs.SettingsPage">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Button Text="Auto" Clicked="ThemeAuto_OnClicked" HorizontalOptions="FillAndExpand" />
-                <Button Text="Light" Clicked="ThemeLight_OnClicked" HorizontalOptions="FillAndExpand" />
-                <Button Text="Dark" Clicked="ThemeDark_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="{localization:RL Auto}" Clicked="ThemeAuto_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="{localization:RL Light}" Clicked="ThemeLight_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="{localization:RL Dark}" Clicked="ThemeDark_OnClicked" HorizontalOptions="FillAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Button Text="Auto" Clicked="LanguageAuto_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="{localization:RL Auto}" Clicked="LanguageAuto_OnClicked" HorizontalOptions="FillAndExpand" />
                 <Button Text="English" Clicked="LanguageEnglish_OnClicked" HorizontalOptions="FillAndExpand" />
                 <Button Text="Русский" Clicked="LanguageRussian_OnClicked" HorizontalOptions="FillAndExpand" />
             </StackLayout>
-            <Button Text="Sign Out" Clicked="SignOut_OnClicked" HorizontalOptions="FillAndExpand" />
+            <Button Text="{localization:RL SignOut}" Clicked="SignOut_OnClicked" HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -3,22 +3,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
+             xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
              x:Class="Crypto_T_Xamarin.lib.screens.creator.CryptoCreatorPage">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <Entry x:Name="NameEntry"
                        Text=""
-                       Placeholder="Name" />
+                       Placeholder="{localization:RL Name}" />
                 <Entry x:Name="CodeEntry"
                        Text=""
-                       Placeholder="Code" />
+                       Placeholder="{localization:RL Code}" />
                 <Entry x:Name="DescriptionEntry"
                        Text=""
-                       Placeholder="Description" />
+                       Placeholder="{localization:RL Description}" />
                 <Image x:Name="CryptoImage" HeightRequest="100" />
-                <Button x:Name="SelectImageButton" Text="Select" Clicked="SelectImage_OnClicked" />
-                <Button x:Name="DeleteImageButton" Text="Delete" Clicked="DeleteImage_OnClicked" />
+                <Button x:Name="SelectImageButton" Text="{localization:RL Select}" Clicked="SelectImage_OnClicked" />
+                <Button x:Name="DeleteImageButton" Text="{localization:RL Delete}" Clicked="DeleteImage_OnClicked" />
                 <StackLayout Orientation="Horizontal">
                     <o:VideoPlayer
                         x:Name="CryptoVideo"
@@ -26,16 +27,16 @@
                         HeightRequest="200"
                     />
                 </StackLayout>
-                <Button x:Name="SelectVideoButton" Text="Select" Clicked="SelectVideo_OnClicked" />
-                <Button x:Name="DeleteVideoButton" Text="Delete" Clicked="DeleteVideo_OnClicked" />
+                <Button x:Name="SelectVideoButton" Text="{localization:RL Select}" Clicked="SelectVideo_OnClicked" />
+                <Button x:Name="DeleteVideoButton" Text="{localization:RL Delete}" Clicked="DeleteVideo_OnClicked" />
             
                 <Label x:Name="EventLatitudeLabel"/>
                 <Label x:Name="EventLongitudeLabel"/>
                 <Entry x:Name="EventNoteEntry"
                        Text=""
-                       Placeholder="Note" />
-                <Button x:Name="PickLocationButton" Text="Pick location" Clicked="PickLocation_OnClicked" />
-                <Button x:Name="DeleteEventButton" Text="Delete" Clicked="DeleteEvent_OnClicked" />
+                       Placeholder="{localization:RL Note}" />
+                <Button x:Name="PickLocationButton" Text="{localization:RL PickLocation}" Clicked="PickLocation_OnClicked" />
+                <Button x:Name="DeleteEventButton" Text="{localization:RL Delete}" Clicked="DeleteEvent_OnClicked" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

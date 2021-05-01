@@ -2,10 +2,11 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
              x:Class="Crypto_T_Xamarin.lib.screens.home.tabs.CryptosPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Cryptos"
+            <Label Text="{localization:RL Cryptos}"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />
         </StackLayout>

@@ -9,6 +9,7 @@ using Crypto_T_Xamarin.lib.models.crypto;
 using Crypto_T_Xamarin.lib.screens.locationPicker;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using RedCorners.Forms.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -55,7 +56,7 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                 EventNoteEntry.Text = e.Value.note;
             }
             
-            Title = "Edit Crypto";
+            Title = RL.L("Edit");
             
             CreateMenuButtons();
             
@@ -65,7 +66,7 @@ namespace Crypto_T_Xamarin.lib.screens.creator
         public CryptoCreatorPage()
         {
             InitializeComponent();
-            Title = "New Crypto";
+            Title = RL.L("New");
             CreateMenuButtons();
             
             UpdateMediaUI();
@@ -91,7 +92,7 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                             return error;
                         });
                     }),
-                    Text = "Delete",
+                    Text = RL.L("Delete"),
                     Priority = 0
                 };
                 ToolbarItems.Add(deleteButton);
@@ -160,7 +161,7 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                         Console.WriteLine("ValidateInputs false");
                     }
                 }),
-                Text = "Save",
+                Text = RL.L("Save"),
                 Priority = 0
             };
             ToolbarItems.Add(saveButton);

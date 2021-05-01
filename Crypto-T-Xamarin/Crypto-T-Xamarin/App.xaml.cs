@@ -1,6 +1,8 @@
 ﻿using System;
 using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.screens.auth;
+using Crypto_T_Xamarin.lib.screens.home;
+using RedCorners.Forms.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +14,8 @@ namespace Crypto_T_Xamarin
     {
         public App()
         {
+            RL.Load(typeof(App), "Crypto_T_Xamarin.", ".trans.json");
+
             InitializeComponent();
 
             MainPage = new NavigationPage(new AuthPage());

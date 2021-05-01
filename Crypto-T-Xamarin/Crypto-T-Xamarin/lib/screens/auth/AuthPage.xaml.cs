@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.screens.home;
+using RedCorners.Forms.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,6 +28,19 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             PasswordEntry.Text = "";
             
             Title = "Authorization";
+            
+            RL.OnLanguageChange += (o, e) =>
+            {
+                Device.BeginInvokeOnMainThread (() => {
+                    Navigation.PopModalAsync()
+                        .ContinueWith(task =>
+                        {
+                            Device.BeginInvokeOnMainThread (() => {
+                                Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                            });
+                        });
+                });
+            };
             
             var restoredAuthData = Session.Shared.restore(error =>
             {
