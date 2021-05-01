@@ -75,10 +75,12 @@
     <ItemGroup>
         <AndroidResource Include="Resources\layout\Tabbar.axml" />
         <AndroidResource Include="Resources\layout\Toolbar.axml" />
+        <AndroidResource Include="Resources\values\secrets.xml">
+          <SubType>Designer</SubType>
+        </AndroidResource>
         <AndroidResource Include="Resources\values\styles.xml" />
         <AndroidResource Include="Resources\values\colors.xml" />
         <AndroidResource Include="Resources\xml\file_paths.xml" />
-        <AndroidResource Include="Resources\xml\secrets.xml" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\Crypto-T-Xamarin\Crypto-T-Xamarin.csproj">

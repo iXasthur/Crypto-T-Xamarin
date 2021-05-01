@@ -155,4 +155,4 @@ obj/
 
 Crypto-T-Xamarin/Crypto-T-Xamarin.Android/google-services.json
 Crypto-T-Xamarin/Crypto-T-Xamarin/lib/utils/Secrets.cs
-Crypto-T-Xamarin/Crypto-T-Xamarin.Android/Resources/xml/secrets.xml
+Crypto-T-Xamarin/Crypto-T-Xamarin.Android/Resources/values/secrets.xml
