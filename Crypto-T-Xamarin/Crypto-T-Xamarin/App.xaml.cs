@@ -20,6 +20,27 @@ namespace Crypto_T_Xamarin
             InitializeComponent();
             
             RL.SetLanguage(Preferences.Get("lang", "En"));
+            var theme = Preferences.Get("theme", null);
+            if (theme != null)
+            {
+                switch (theme!)
+                {
+                    case "light":
+                    {
+                        UserAppTheme = OSAppTheme.Light;
+                        break;
+                    }
+                    case "dark":
+                    {
+                        UserAppTheme = OSAppTheme.Dark;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                UserAppTheme = OSAppTheme.Unspecified;
+            }
 
             UpdateMainPage();
         }
