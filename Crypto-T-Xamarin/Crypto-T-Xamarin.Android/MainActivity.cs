@@ -1,4 +1,5 @@
 ﻿using System;
+using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -41,6 +42,7 @@ namespace Crypto_T_Xamarin.Android
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
             FirebaseApp.InitializeApp(Application.Context);
 
             LoadApplication(new App());

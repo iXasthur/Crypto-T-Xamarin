@@ -17,7 +17,8 @@
         <PackageReference Include="Plugin.FirebaseAuth" Version="4.1.0" />
         <PackageReference Include="Plugin.FirebaseStorage" Version="4.1.0" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
-        <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+        <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2012" />
     </ItemGroup>
 
     <ItemGroup>
