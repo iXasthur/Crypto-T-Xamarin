@@ -28,15 +28,16 @@
                        Margin="20, 0"
                        />
                 <Label Text="{localization:RL Image}" Padding="0, 10" />
-                <Image x:Name="CryptoImage" HeightRequest="100" Margin="20, 0" />
+                <Image x:Name="CryptoImage" HeightRequest="100" Margin="20, 0, 20, 10" />
                 <Button x:Name="SelectImageButton" Text="{localization:RL Select}" Clicked="SelectImage_OnClicked" Margin="20, 0" />
                 <Button x:Name="DeleteImageButton" Text="{localization:RL Delete}" Clicked="DeleteImage_OnClicked" Margin="20, 0" />
                 <Label Text="{localization:RL Video}" Padding="0, 10" />
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" >
                     <o:VideoPlayer
                         x:Name="CryptoVideo"
                         FillMode="ResizeAspect"
-                        HeightRequest="200"
+                        HeightRequest="180"
+                        Margin="20, 0, 20, 10"
                     />
                 </StackLayout>
                 <Button x:Name="SelectVideoButton" Text="{localization:RL Select}" Clicked="SelectVideo_OnClicked" Margin="20, 0" />

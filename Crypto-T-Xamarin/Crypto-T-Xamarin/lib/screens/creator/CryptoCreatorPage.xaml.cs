@@ -300,9 +300,7 @@ namespace Crypto_T_Xamarin.lib.screens.creator
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            
             CryptoVideo.Pause();
-            CryptoVideo.IsVisible = false;
         }
 
         protected override bool OnBackButtonPressed()

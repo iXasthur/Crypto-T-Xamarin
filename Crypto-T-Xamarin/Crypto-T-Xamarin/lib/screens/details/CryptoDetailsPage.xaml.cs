@@ -72,6 +72,8 @@ namespace Crypto_T_Xamarin.lib.screens.details
             }
             else
             {
+                CryptoVideo.Source = null;
+                CryptoVideo.Pause();
                 CryptoVideo.IsVisible = false;
             }
             
@@ -103,9 +105,7 @@ namespace Crypto_T_Xamarin.lib.screens.details
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            
             CryptoVideo.Pause();
-            CryptoVideo.IsVisible = false;
         }
     }
 }

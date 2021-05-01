@@ -16,11 +16,11 @@
                 <Label Text="{localization:RL Description}" Padding="0, 10" />
                 <Label x:Name="CryptoDescriptionLabel" Padding="20, 0" />
                 <Label Text="{localization:RL Video}" Padding="0, 10" />
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal"  Margin="20, 0">
                     <o:VideoPlayer
                         x:Name="CryptoVideo"
                         FillMode="ResizeAspect"
-                        HeightRequest="200"
+                        HeightRequest="180"
                     />
                 </StackLayout>
                 <Label Text="{localization:RL Event}" Padding="0, 10" />
