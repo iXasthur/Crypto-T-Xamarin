@@ -25,17 +25,17 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         
         private void ThemeAuto_OnClicked(object sender, EventArgs e)
         {
-            
+            Application.Current.UserAppTheme = OSAppTheme.Unspecified;
         }
         
         private void ThemeLight_OnClicked(object sender, EventArgs e)
         {
-            
+            Application.Current.UserAppTheme = OSAppTheme.Light;
         }
         
         private void ThemeDark_OnClicked(object sender, EventArgs e)
         {
-            
+            Application.Current.UserAppTheme = OSAppTheme.Dark;
         }
         
         private void LanguageAuto_OnClicked(object sender, EventArgs e)

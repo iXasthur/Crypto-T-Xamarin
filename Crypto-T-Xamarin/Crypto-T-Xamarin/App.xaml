@@ -3,6 +3,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Crypto_T_Xamarin.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="AuthButtonColorLight">#607D8B</Color>
+            <Color x:Key="AuthButtonColorDark">#BB86FC</Color>
+            <Color x:Key="AuthButtonColor">#607D8B</Color>
+            
+            <Color x:Key="AppBackgroundColorLight">#FEFEFE</Color>
+            <Color x:Key="AppBackgroundColorDark">#212121</Color>
+            <Color x:Key="AppBackgroundColor">#FEFEFE</Color>
 
+            <Color x:Key="AppTextColorLight">#101010</Color>
+            <Color x:Key="AppTextColorDark">#FEFEFE</Color>
+            <Color x:Key="AppTextColor">#101010</Color>
+        </ResourceDictionary>
+        
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{
+                    AppThemeBinding 
+                    Light=LightGray,
+                    Dark={StaticResource AuthButtonColorDark}
+                }">
+            </Setter>
+            <Setter Property="TextColor" Value="{
+                    AppThemeBinding 
+                    Light={StaticResource AppTextColorLight},
+                    Dark={StaticResource AppTextColorDark}
+                }">
+            </Setter>
+        </Style>
+        
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{
+                    AppThemeBinding 
+                    Light={StaticResource AppTextColorLight},
+                    Dark={StaticResource AppTextColorDark}
+                }">
+            </Setter>
+        </Style>
+        
+        <Style TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{
+                    AppThemeBinding 
+                    Light={StaticResource AppBackgroundColorLight},
+                    Dark={StaticResource AppBackgroundColorDark}
+                }">
+            </Setter>
+        </Style>
+        
+        <!-- <Style TargetType="ImageCell"> -->
+        <!--     <Setter Property="DetailColor" Value="{ -->
+        <!--             AppThemeBinding  -->
+        <!--             Light={StaticResource AppTextColorLight}, -->
+        <!--             Dark={StaticResource AppTextColorDark} -->
+        <!--         }"> -->
+        <!--     </Setter> -->
+        <!--     <Setter Property="TextColor" Value="{ -->
+        <!--             AppThemeBinding  -->
+        <!--             Light={StaticResource AppTextColorLight}, -->
+        <!--             Dark={StaticResource AppTextColorDark} -->
+        <!--         }"> -->
+        <!--     </Setter> -->
+        <!-- </Style> -->
+        <!-- -->
+        
+        <!-- <Style TargetType="NavigationPage"> -->
+        <!--     <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}"></Setter> -->
+        <!--     <Setter Property="BarTextColor" Value="{AppThemeBinding Light=Black, Dark=White}"></Setter> -->
+        <!-- </Style> -->
+        
+        <Style TargetType="Entry">
+            <Setter Property="PlaceholderColor" Value="{
+                    AppThemeBinding
+                    Light={StaticResource AppTextColorLight},
+                    Dark={StaticResource AppTextColorDark}
+                }">
+            </Setter>
+            <Setter Property="TextColor" Value="{
+                    AppThemeBinding
+                    Light={StaticResource AppTextColorLight},
+                    Dark={StaticResource AppTextColorDark}
+                }">
+            </Setter>
+        </Style>
+        
     </Application.Resources>
 </Application>

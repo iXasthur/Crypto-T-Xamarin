@@ -8,6 +8,7 @@ using Crypto_T_Xamarin.lib.screens.creator;
 using Crypto_T_Xamarin.lib.screens.details;
 using Crypto_T_Xamarin.lib.utils;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace Crypto_T_Xamarin.lib.screens.home.tabs
