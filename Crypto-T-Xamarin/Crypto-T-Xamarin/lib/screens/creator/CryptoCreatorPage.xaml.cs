@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.models.crypto;
+using Crypto_T_Xamarin.lib.screens.locationPicker;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace Crypto_T_Xamarin.lib.screens.creator
@@ -26,6 +29,8 @@ namespace Crypto_T_Xamarin.lib.screens.creator
         private Uri? iconUri = null;
         private Uri? videoUri = null;
 
+        private Position? eventPosition = null;
+
         public CryptoCreatorPage(CryptoAsset assetToEdit)
         {
             _assetToEdit = assetToEdit;
@@ -42,6 +47,13 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             NameEntry.Text = _assetToEdit.Value.name;
             CodeEntry.Text = _assetToEdit.Value.code;
             DescriptionEntry.Text = _assetToEdit.Value.description;
+
+            var e = assetToEdit.suggestedEvent;
+            if (e != null)
+            {
+                eventPosition = new Position(Convert.ToDouble(e.Value.latitude), Convert.ToDouble(e.Value.longitude));
+                EventNoteEntry.Text = e.Value.note;
+            }
             
             Title = "Edit Crypto";
             
@@ -118,6 +130,18 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                             };
                         }
                         
+                        if (eventPosition != null)
+                        {
+                            asset.suggestedEvent = new CryptoEvent
+                            {
+                                latitude = eventPosition.Value.Latitude.ToString(CultureInfo.InvariantCulture),
+                                longitude = eventPosition.Value.Longitude.ToString(CultureInfo.InvariantCulture),
+                                note = EventNoteEntry.Text
+                            };
+                        } else {
+                            asset.suggestedEvent = null;
+                        }
+                        
                         Session.Shared.updateRemoteAsset(asset, iconUri, videoUri, error =>
                         {
                             if (error == null)
@@ -179,6 +203,24 @@ namespace Crypto_T_Xamarin.lib.screens.creator
                 CryptoVideo.IsVisible = false;
                 DeleteVideoButton.IsVisible = false;
             }
+            
+            if (eventPosition != null)
+            {
+                EventLatitudeLabel.Text = eventPosition.Value.Latitude.ToString(CultureInfo.InvariantCulture);
+                EventLongitudeLabel.Text = eventPosition.Value.Longitude.ToString(CultureInfo.InvariantCulture);
+                
+                EventLatitudeLabel.IsVisible = true;
+                EventLongitudeLabel.IsVisible = true;
+                EventNoteEntry.IsVisible = true;
+                DeleteEventButton.IsVisible = true;
+            }
+            else
+            {
+                EventLatitudeLabel.IsVisible = false;
+                EventLongitudeLabel.IsVisible = false;
+                EventNoteEntry.IsVisible = false;
+                DeleteEventButton.IsVisible = false;
+            }
         }
 
         private async void SelectImage_OnClicked(object sender, EventArgs e)
@@ -212,6 +254,22 @@ namespace Crypto_T_Xamarin.lib.screens.creator
         private void DeleteVideo_OnClicked(object sender, EventArgs e)
         {
             videoUri = null;
+            UpdateMediaUI();
+        }
+        
+        private void PickLocation_OnClicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new NavigationPage(new LocationPickerPage(position =>
+            {
+                eventPosition = position;
+                UpdateMediaUI();
+            })));
+        }
+            
+        private void DeleteEvent_OnClicked(object sender, EventArgs e)
+        {
+            eventPosition = null;
+            EventNoteEntry.Text = "";
             UpdateMediaUI();
         }
         
