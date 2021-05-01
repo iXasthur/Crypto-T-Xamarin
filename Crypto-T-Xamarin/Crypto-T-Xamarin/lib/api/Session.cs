@@ -18,8 +18,6 @@ namespace Crypto_T_Xamarin.lib.api
         private bool initialized = false;
 
         private CryptoAssetFirebaseManager cryptoAssetManager = new CryptoAssetFirebaseManager();
-        
-        public CryptoAsset? selectedAsset = null;
 
         public bool isInitialized()
         {
@@ -33,16 +31,20 @@ namespace Crypto_T_Xamarin.lib.api
         
         public CryptoAsset? getLocalAsset(string id)
         {
-            return getLocalAssets()?.Find(asset => asset.id == id);
+            var index = getLocalAssets()?.FindIndex(asset0 => asset0.id == id);
+            if (index != null && index != -1)
+            {
+                return assets![index.Value];
+            }
+            else
+            {
+                return null;
+            }
         }
         
         private void deleteLocalAsset(CryptoAsset asset)
         {
-            var removed = assets?.Remove(asset);
-            if (removed != null && removed.Value && selectedAsset?.id == asset.id)
-            {
-                selectedAsset = null;
-            }
+            assets?.Remove(asset);
         }
         
         public void deleteRemoteAsset(CryptoAsset asset, Func<Exception?, Exception?> completion)
@@ -68,10 +70,6 @@ namespace Crypto_T_Xamarin.lib.api
             if (index != null && index != -1)
             {
                 assets![index.Value] = asset;
-                if (selectedAsset?.id == asset.id)
-                {
-                    selectedAsset = asset;
-                }
             } else {
                 assets!.Add(asset);
             }
@@ -106,19 +104,13 @@ namespace Crypto_T_Xamarin.lib.api
                 {
                     Console.WriteLine(error);
                     this.assets = new List<CryptoAsset>();
-                    selectedAsset = null;
                 } else if (assets != null)
                 {
                     this.assets = assets;
-                    if (selectedAsset != null)
-                    {
-                        selectedAsset = getLocalAsset(selectedAsset.Value.id);
-                    }
                 } else
                 {
                     Console.WriteLine("Didn't receive assets and error");
                     this.assets = new List<CryptoAsset>();
-                    selectedAsset = null;
                 }
 
                 onCompleted();
@@ -154,7 +146,6 @@ namespace Crypto_T_Xamarin.lib.api
             }
 
             AuthDataStorage.Delete();
-            selectedAsset = null;
             authData = null;
             assets = null;
         }

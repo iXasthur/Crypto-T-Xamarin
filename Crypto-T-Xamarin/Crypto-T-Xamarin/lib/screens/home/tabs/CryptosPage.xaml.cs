@@ -47,7 +47,6 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Session.Shared.selectedAsset = null;
             updateTableView();
         }
 

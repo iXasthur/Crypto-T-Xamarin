@@ -55,6 +55,30 @@ namespace Crypto_T_Xamarin.lib.screens.creator
 
         private void CreateMenuButtons()
         {
+            if (_assetToEdit != null)
+            {
+                var deleteButton = new ToolbarItem
+                {
+                    Command = new Command(() =>
+                    {
+                        Session.Shared.deleteRemoteAsset(_assetToEdit.Value, error =>
+                        {
+                            if (error == null)
+                            {
+                                Device.BeginInvokeOnMainThread (() =>
+                                {
+                                    Navigation.PopAsync();
+                                });
+                            }
+                            return error;
+                        });
+                    }),
+                    Text = "Delete",
+                    Priority = 0
+                };
+                ToolbarItems.Add(deleteButton);
+            }
+
             var saveButton = new ToolbarItem {
                 Command = new Command(() =>
                 {
