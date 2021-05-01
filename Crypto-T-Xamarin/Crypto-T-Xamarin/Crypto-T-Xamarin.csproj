@@ -16,6 +16,7 @@
         <PackageReference Include="Plugin.CloudFirestore" Version="4.1.0" />
         <PackageReference Include="Plugin.FirebaseAuth" Version="4.1.0" />
         <PackageReference Include="Plugin.FirebaseStorage" Version="4.1.0" />
+        <PackageReference Include="RedCorners.Forms.Localization" Version="8.46.5" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
         <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2012" />

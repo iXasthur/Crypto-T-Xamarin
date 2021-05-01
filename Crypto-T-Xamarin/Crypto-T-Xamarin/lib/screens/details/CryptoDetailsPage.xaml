@@ -5,21 +5,23 @@
              xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              x:Class="Crypto_T_Xamarin.lib.screens.details.CryptoDetailsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Image x:Name="CryptoImage" HeightRequest="100" />
-            <Label x:Name="CryptoNameLabel" />
-            <Label x:Name="CryptoCodeLabel" />
-            <Label x:Name="CryptoDescriptionLabel" />
-            <StackLayout Orientation="Horizontal">
-                <o:VideoPlayer
-                    x:Name="CryptoVideo"
-                    FillMode="ResizeAspect"
-                    HeightRequest="200"
-                />
+        <ScrollView>
+            <StackLayout>
+                <Image x:Name="CryptoImage" HeightRequest="100" />
+                <Label x:Name="CryptoNameLabel" />
+                <Label x:Name="CryptoCodeLabel" />
+                <Label x:Name="CryptoDescriptionLabel" />
+                <StackLayout Orientation="Horizontal">
+                    <o:VideoPlayer
+                        x:Name="CryptoVideo"
+                        FillMode="ResizeAspect"
+                        HeightRequest="200"
+                    />
+                </StackLayout>
+                <Label x:Name="CryptoEventLatitudeLabel"/>
+                <Label x:Name="CryptoEventLongitudeLabel" />
+                <Label x:Name="CryptoEventNoteLabel" />
             </StackLayout>
-            <Label x:Name="CryptoEventLatitudeLabel"/>
-            <Label x:Name="CryptoEventLongitudeLabel" />
-            <Label x:Name="CryptoEventNoteLabel" />
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
