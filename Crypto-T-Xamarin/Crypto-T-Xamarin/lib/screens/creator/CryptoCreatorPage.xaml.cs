@@ -15,52 +15,86 @@ namespace Crypto_T_Xamarin.lib.screens.creator
     public partial class CryptoCreatorPage : ContentPage
     {
 
+        private CryptoAsset? _assetToEdit = null;
+
         private string name => NameEntry.Text;
         private string code => CodeEntry.Text;
         private string description => DescriptionEntry.Text;
+
+        private Uri? iconUri = null;
+        private Uri? videoUri = null;
+
+        public CryptoCreatorPage(CryptoAsset assetToEdit)
+        {
+            _assetToEdit = assetToEdit;
+            if (assetToEdit.iconFileData?.downloadURL != null)
+            {
+                iconUri = new Uri(assetToEdit.iconFileData.Value.downloadURL);
+            }
+            if (assetToEdit.videoFileData?.downloadURL != null)
+            {
+                videoUri = new Uri(assetToEdit.videoFileData.Value.downloadURL);
+            }
+            InitializeComponent();
+
+            NameEntry.Text = _assetToEdit.Value.name;
+            CodeEntry.Text = _assetToEdit.Value.code;
+            DescriptionEntry.Text = _assetToEdit.Value.description;
+            
+            Title = "Edit Crypto";
+            
+            CreateMenuButtons();
+        }
         
         public CryptoCreatorPage()
         {
             InitializeComponent();
+            Title = "New Crypto";
+            CreateMenuButtons();
+        }
 
-            Title = "Creator";
-            
-            var cancelButton = new ToolbarItem {
-                Command = new Command(() =>
-                {
-                    Device.BeginInvokeOnMainThread (() =>
-                    {
-                        Navigation.PopModalAsync();
-                    });
-                }),
-                Text = "Cancel",
-                Priority = 0
-            };
-            ToolbarItems.Add(cancelButton);
-            
+        private void CreateMenuButtons()
+        {
             var saveButton = new ToolbarItem {
                 Command = new Command(() =>
                 {
                     if (ValidateInputs())
                     {
-                        var asset = new CryptoAsset
+                        CryptoAsset asset;
+                        if (_assetToEdit != null)
                         {
-                            id = Guid.NewGuid().ToString(),
-                            name = name,
-                            code = code,
-                            description = description,
-                            iconFileData = null,
-                            suggestedEvent = null,
-                            videoFileData = null
-                        };
+                            asset = new CryptoAsset
+                            {
+                                id = _assetToEdit.Value.id,
+                                name = name,
+                                code = code,
+                                description = description,
+                                iconFileData = _assetToEdit?.iconFileData,
+                                suggestedEvent = _assetToEdit?.suggestedEvent,
+                                videoFileData = _assetToEdit?.videoFileData
+                            };
+                        }
+                        else
+                        {
+                            asset = new CryptoAsset
+                            {
+                                id = Guid.NewGuid().ToString(),
+                                name = name,
+                                code = code,
+                                description = description,
+                                iconFileData = null,
+                                suggestedEvent = null,
+                                videoFileData = null
+                            };
+                        }
                         
-                        Session.Shared.updateRemoteAsset(asset, null, null, error =>
+                        Session.Shared.updateRemoteAsset(asset, iconUri, videoUri, error =>
                         {
                             if (error == null)
                             {
                                 Device.BeginInvokeOnMainThread (() =>
                                 {
-                                    Navigation.PopModalAsync();
+                                    Navigation.PopAsync();
                                 });
                             }
 

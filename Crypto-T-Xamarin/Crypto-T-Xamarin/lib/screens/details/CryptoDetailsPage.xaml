@@ -5,9 +5,10 @@
              x:Class="Crypto_T_Xamarin.lib.screens.details.CryptoDetailsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Details"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <Image x:Name="CryptoImage" />
+            <Label x:Name="CryptoNameLabel" />
+            <Label x:Name="CryptoCodeLabel" />
+            <Label x:Name="CryptoDescriptionLabel" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

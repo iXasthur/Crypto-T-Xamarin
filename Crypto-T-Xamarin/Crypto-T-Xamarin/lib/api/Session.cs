@@ -19,7 +19,7 @@ namespace Crypto_T_Xamarin.lib.api
 
         private CryptoAssetFirebaseManager cryptoAssetManager = new CryptoAssetFirebaseManager();
         
-        CryptoAsset? selectedAsset = null;
+        public CryptoAsset? selectedAsset = null;
 
         public bool isInitialized()
         {
@@ -64,7 +64,7 @@ namespace Crypto_T_Xamarin.lib.api
         
         private void updateLocalAsset(CryptoAsset asset)
         {
-            var index = getLocalAssets()?.IndexOf(asset);
+            var index = getLocalAssets()?.FindIndex(asset0 => asset0.id == asset.id);
             if (index != null && index != -1)
             {
                 assets![index.Value] = asset;
