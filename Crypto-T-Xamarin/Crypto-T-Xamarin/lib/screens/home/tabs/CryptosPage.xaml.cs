@@ -68,7 +68,15 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
 
                 var cell = new ImageCell
                 {
-                    ImageSource = ImageSource.FromUri(imageUri),
+                    ImageSource = 
+                        imageUri.Scheme == "file"
+                            ? ImageSource.FromFile(imageUri.AbsolutePath)
+                            : new UriImageSource
+                            {
+                                Uri = imageUri,
+                                CachingEnabled = true,
+                                CacheValidity = new TimeSpan(0, 0, 5, 0)
+                            },
                     Text = asset.name,
                     Detail = asset.code,
                     Command = new Command(() =>

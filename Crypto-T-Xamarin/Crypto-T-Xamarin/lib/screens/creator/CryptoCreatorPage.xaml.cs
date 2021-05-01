@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
 using Crypto_T_Xamarin.lib.models.crypto;
 using Crypto_T_Xamarin.lib.screens.locationPicker;
+using Octane.Xamarin.Forms.VideoPlayer;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using RedCorners.Forms.Localization;
@@ -193,7 +194,15 @@ namespace Crypto_T_Xamarin.lib.screens.creator
             Device.BeginInvokeOnMainThread (() => {
                 if (iconUri != null)
                 {
-                    CryptoImage.Source = iconUri.Scheme == "file" ? ImageSource.FromFile(iconUri.AbsolutePath) : iconUri;
+                    CryptoImage.Source =
+                        iconUri.Scheme == "file"
+                            ? ImageSource.FromFile(iconUri.AbsolutePath)
+                            : new UriImageSource
+                            {
+                                Uri = iconUri,
+                                CachingEnabled = true,
+                                CacheValidity = new TimeSpan(0, 0, 5, 0)
+                            };
                     CryptoImage.IsVisible = true;
                     DeleteImageButton.IsVisible = true;
                 }

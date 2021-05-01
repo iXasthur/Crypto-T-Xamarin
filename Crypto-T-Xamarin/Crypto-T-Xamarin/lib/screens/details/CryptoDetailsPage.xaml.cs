@@ -55,7 +55,15 @@ namespace Crypto_T_Xamarin.lib.screens.details
                 imageUri = new Uri(asset.iconFileData.Value.downloadURL);
             }
 
-            CryptoImage.Source = ImageSource.FromUri(imageUri);
+            CryptoImage.Source = 
+                imageUri.Scheme == "file"
+                    ? ImageSource.FromFile(imageUri.AbsolutePath)
+                    : new UriImageSource
+                    {
+                        Uri = imageUri,
+                        CachingEnabled = true,
+                        CacheValidity = new TimeSpan(0, 0, 5, 0)
+                    };
 
             if (asset.videoFileData?.downloadURL != null)
             {
