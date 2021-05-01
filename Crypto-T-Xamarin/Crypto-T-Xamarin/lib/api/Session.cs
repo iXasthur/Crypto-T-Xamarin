@@ -134,7 +134,7 @@ namespace Crypto_T_Xamarin.lib.api
             });
         }
         
-        public async void destroy()
+        public void destroy()
         {
             initialized = false;
             
