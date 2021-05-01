@@ -22,5 +22,35 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
             Session.Shared.destroy();
             Navigation.PopModalAsync();
         }
+        
+        private void ThemeAuto_OnClicked(object sender, EventArgs e)
+        {
+            
+        }
+        
+        private void ThemeLight_OnClicked(object sender, EventArgs e)
+        {
+            
+        }
+        
+        private void ThemeDark_OnClicked(object sender, EventArgs e)
+        {
+            
+        }
+        
+        private void LanguageAuto_OnClicked(object sender, EventArgs e)
+        {
+            
+        }
+        
+        private void LanguageEnglish_OnClicked(object sender, EventArgs e)
+        {
+            
+        }
+        
+        private void LanguageRussian_OnClicked(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

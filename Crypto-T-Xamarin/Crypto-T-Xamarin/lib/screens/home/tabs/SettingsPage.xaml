@@ -5,6 +5,16 @@
              x:Class="Crypto_T_Xamarin.lib.screens.home.tabs.SettingsPage">
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="Auto" Clicked="ThemeAuto_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="Light" Clicked="ThemeLight_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="Dark" Clicked="ThemeDark_OnClicked" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="Auto" Clicked="LanguageAuto_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="English" Clicked="LanguageEnglish_OnClicked" HorizontalOptions="FillAndExpand" />
+                <Button Text="Русский" Clicked="LanguageRussian_OnClicked" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
             <Button Text="Sign Out" Clicked="SignOut_OnClicked" HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
