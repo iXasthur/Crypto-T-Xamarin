@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crypto_T_Xamarin.lib.api;
+using Crypto_T_Xamarin.lib.screens.auth;
 using RedCorners.Forms.Localization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -22,7 +23,7 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         private void SignOut_OnClicked(object sender, EventArgs e)
         {
             Session.Shared.destroy();
-            Navigation.PopModalAsync();
+            Application.Current.MainPage = new NavigationPage(new AuthPage());
         }
         
         private void ThemeAuto_OnClicked(object sender, EventArgs e)
@@ -44,18 +45,21 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
         {
             Preferences.Remove("lang");
             RL.SetLanguage("En");
+            Application.Current.MainPage = new NavigationPage(new HomePage());
         }
         
         private void LanguageEnglish_OnClicked(object sender, EventArgs e)
         {
             Preferences.Set("lang", "En");
             RL.SetLanguage("En");
+            Application.Current.MainPage = new NavigationPage(new HomePage());
         }
         
         private void LanguageRussian_OnClicked(object sender, EventArgs e)
         {
             Preferences.Set("lang", "Ru");
             RL.SetLanguage("Ru");
+            Application.Current.MainPage = new NavigationPage(new HomePage());
         }
     }
 }

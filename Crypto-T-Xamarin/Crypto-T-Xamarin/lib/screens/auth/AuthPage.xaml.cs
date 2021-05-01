@@ -15,9 +15,6 @@ namespace Crypto_T_Xamarin.lib.screens.auth
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AuthPage : ContentPage
     {
-
-        private bool _onAppearCalledOnce = false;
-        
         private string email => EmailEntry.Text;
         private string password => PasswordEntry.Text;
 
@@ -30,47 +27,26 @@ namespace Crypto_T_Xamarin.lib.screens.auth
             PasswordEntry.Text = "";
             
             Title = RL.L("Authorization");
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (!_onAppearCalledOnce)
-            {
-                _onAppearCalledOnce = true;
-            }
-            else
-            {
-                return;
-            }
             
-            if (Session.Shared.isInitialized())
+            var restoredAuthData = Session.Shared.restore(error =>
             {
-                Navigation.PushModalAsync(new NavigationPage(new HomePage()));
-            }
-            else
-            {
-                var restoredAuthData = Session.Shared.restore(error =>
-                {
-                    if (error != null) {
-                        Device.BeginInvokeOnMainThread (() => {
-                            SomethingWentWrongLabel.IsVisible = false;
-                        });
-                    } else {
-                        Device.BeginInvokeOnMainThread (() => {
-                            SomethingWentWrongLabel.IsVisible = false;
-                            Navigation.PushModalAsync(new NavigationPage(new HomePage()));
-                        });
-                    }
-                    return error;
-                });
-
-                if (restoredAuthData != null)
-                {
-                    EmailEntry.Text = restoredAuthData.Value.email;
-                    PasswordEntry.Text = restoredAuthData.Value.password;
+                if (error != null) {
+                    Device.BeginInvokeOnMainThread (() => {
+                        SomethingWentWrongLabel.IsVisible = false;
+                    });
+                } else {
+                    Device.BeginInvokeOnMainThread (() => {
+                        SomethingWentWrongLabel.IsVisible = false;
+                        Application.Current.MainPage = new NavigationPage(new HomePage());
+                    });
                 }
+                return error;
+            });
+
+            if (restoredAuthData != null)
+            {
+                EmailEntry.Text = restoredAuthData.Value.email;
+                PasswordEntry.Text = restoredAuthData.Value.password;
             }
         }
 
@@ -93,7 +69,7 @@ namespace Crypto_T_Xamarin.lib.screens.auth
                     if (error == null)
                     {
                         Device.BeginInvokeOnMainThread (() => {
-                            Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                            Application.Current.MainPage = new NavigationPage(new HomePage());
                         });
                     }
                     else
@@ -123,7 +99,7 @@ namespace Crypto_T_Xamarin.lib.screens.auth
                     if (error == null)
                     {
                         Device.BeginInvokeOnMainThread (() => {
-                            Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                            Application.Current.MainPage = new NavigationPage(new HomePage());
                         });
                     }
                     else

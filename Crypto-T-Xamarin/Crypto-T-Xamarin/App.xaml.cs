@@ -20,15 +20,20 @@ namespace Crypto_T_Xamarin
             InitializeComponent();
             
             RL.SetLanguage(Preferences.Get("lang", "En"));
-            
-            RL.OnLanguageChange += (o, e) =>
-            {
-                Device.BeginInvokeOnMainThread (() => {
-                    MainPage = new NavigationPage(new AuthPage());
-                });
-            };
 
-            MainPage = new NavigationPage(new AuthPage());
+            UpdateMainPage();
+        }
+
+        public void UpdateMainPage()
+        {
+            if (Session.Shared.isInitialized())
+            {
+                MainPage = new NavigationPage(new HomePage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new AuthPage());
+            }
         }
 
         protected override void OnStart()
