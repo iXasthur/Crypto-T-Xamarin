@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Crypto_T_Xamarin.lib.models.crypto;
 using Crypto_T_Xamarin.lib.utils;
 using Plugin.CloudFirestore;
+using Plugin.FirebaseStorage;
 
 namespace Crypto_T_Xamarin.lib.api
 {
@@ -11,7 +11,7 @@ namespace Crypto_T_Xamarin.lib.api
     {
         private IFirestore db = CrossCloudFirestore.Current.Instance;
         
-        // private val storage = FirebaseStorage.getInstance()
+        private IStorage storage = CrossFirebaseStorage.Current.Instance;
         
         public void deleteRemoteAsset(CryptoAsset asset, Func<Exception?, Exception?> completion)
         {
@@ -65,98 +65,102 @@ namespace Crypto_T_Xamarin.lib.api
                 });
         }
         
-        // private void getStorageDownloadURL(path: String, completion: (Uri?, Exception?) -> Unit) {
-        //     val storageRef = storage.reference
-        //     val fileRef = storageRef.child(path)
-        //     fileRef
-        //         .downloadUrl
-        //         .addOnSuccessListener { uri ->
-        //             completion(uri, null)
-        //         }
-        //         .addOnFailureListener { e ->
-        //             completion(null, e)
-        //         }
-        // }
-        
-        private void deleteFile(CloudFileData file, Func<Exception?, Exception?> completion) {
-            completion(new Exception("deleteFile not implemented"));
-            
-            // val storageRef = this.storage.reference
-            // val fileRef = storageRef.child(file.path)
-            //
-            // fileRef
-            //     .delete()
-            //     .addOnSuccessListener {
-            //         completion(null)
-            //     }
-            //     .addOnFailureListener { e ->
-            //         completion(e)
-            //     }
+        private void getStorageDownloadURL(string path, Func<Uri?, Exception?, Uri?> completion)
+        {
+            var storageRef = storage.RootReference;
+            var fileRef = storageRef.Child(path);
+            fileRef
+                .GetDownloadUrlAsync()
+                .ContinueWith(task =>
+                {
+                    completion(task.Result, task.Exception);
+                    return task.Result;
+                });
         }
         
-        // private void uploadFile(fileRef: StorageReference, stream: InputStream, metadata: StorageMetadata, completion: (CloudFileData?, Exception?) -> Unit) {
-        //     fileRef
-        //         .putStream(stream, metadata)
-        //         .addOnSuccessListener { _ ->
-        //             this.getStorageDownloadURL(fileRef.path) { uri, error ->
-        //                 when {
-        //                     error != null -> {
-        //                         completion(null, error)
-        //                     }
-        //                     uri != null -> {
-        //                         println("Uploaded file $fileRef.path")
-        //                         completion(CloudFileData(fileRef.path, uri.toString()), null)
-        //                     }
-        //                     else -> {
-        //                         completion(null, Exception("Both uri and error in uploadFile are null"))
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //         .addOnFailureListener { e ->
-        //             completion(null, e)
-        //         }
-        // }
+        private void deleteFile(CloudFileData file, Func<Exception?, Exception?> completion) 
+        {
+            var storageRef = storage.RootReference;
+            var fileRef = storageRef.Child(file.path);
+            
+            fileRef
+                .DeleteAsync()
+                .ContinueWith(task =>
+                {
+                    completion(task.Exception);
+                    return task.Exception;
+                });
+            
+        }
+        
+        private void uploadFile(IStorageReference fileRef, string filePath, MetadataChange metadata, Func<CloudFileData?, Exception?, CloudFileData?> completion)
+        {
+            fileRef
+                .PutFileAsync(filePath, metadata)
+                .ContinueWith(task =>
+                {
+                    if (task.Exception == null)
+                    {
+                        getStorageDownloadURL(fileRef.Path, (uri, error) =>
+                        {
+                            if (error == null)
+                            {
+                                if (uri != null)
+                                {
+                                    Console.WriteLine("Uploaded file " + fileRef.Path);
+                                    completion(
+                                        new CloudFileData
+                                        {
+                                            path = fileRef.Path,
+                                            downloadURL = uri.AbsoluteUri
+                                        }, null
+                                    );
+                                }
+                                else
+                                {
+                                    completion(null, new Exception("Both uri and error in uploadFile are null"));
+                                }
+                            }
+                            else
+                            {
+                                completion(null, error);
+                            }
+
+                            return uri;
+                        });
+                    }
+                    else
+                    {
+                        completion(null, task.Exception);
+                    }
+
+                    return task.Exception;
+                });
+        }
         
         private void uploadImage(Uri imageUri, Func<CloudFileData?, Exception?, CloudFileData?> completion) {
-            completion(null, new Exception("uploadImage not implemented"));
-            // try {
-            //     val inputStream: InputStream? = App.applicationContext().contentResolver.openInputStream(imageUri)
-            //     if (inputStream != null) {
-            //         val storageRef = this.storage.reference
-            //         val path = "${Constants.Api.Firebase.imagesFolderName}/${UUID.randomUUID()}-android-image"
-            //         val videoRef = storageRef.child(path)
-            //         val metadata = StorageMetadata()
-            //         this.uploadFile(videoRef, inputStream, metadata) { fileData, error ->
-            //             completion(fileData, error)
-            //         }
-            //     } else {
-            //         completion(null, Exception("Unable to open stream from Uri"))
-            //     }
-            // } catch (error: Throwable) {
-            //     completion(null, Exception("Unable to process image Uri"))
-            // }
+            var storageRef = storage.RootReference;
+            var path = Constants.Api.Firebase.imagesFolderName + "/" + Guid.NewGuid() +"-xamarin-image";
+            var imageRef = storageRef.Child(path);
+            var metadata = new MetadataChange();
+            uploadFile(imageRef, imageUri.AbsolutePath, metadata, (fileData, error) =>
+            {
+                completion(fileData, error);
+                return fileData;
+            });
         }
         
         private void uploadVideo(Uri videoUri, Func<CloudFileData?, Exception?, CloudFileData?> completion)
         {
-            completion(null, new Exception("uploadVideo not implemented"));
-            // try {
-            //     val inputStream: InputStream? = App.applicationContext().contentResolver.openInputStream(videoUri)
-            //     if (inputStream != null) {
-            //         val storageRef = this.storage.reference
-            //         val path = "${Constants.Api.Firebase.videosFolderName}/${UUID.randomUUID()}-android-video"
-            //         val videoRef = storageRef.child(path)
-            //         val metadata = StorageMetadata()
-            //         this.uploadFile(videoRef, inputStream, metadata) { fileData, error ->
-            //             completion(fileData, error)
-            //         }
-            //     } else {
-            //         completion(null, Exception("Unable to open stream from Uri"))
-            //     }
-            // } catch (error: Throwable) {
-            //     completion(null, Exception("Unable to process video Uri"))
-            // }
+            var storageRef = storage.RootReference;
+            var path = Constants.Api.Firebase.videosFolderName + "/" + Guid.NewGuid() +"-xamarin-video";
+            var videoRef = storageRef.Child(path);
+            var metadata = new MetadataChange();
+            uploadFile(videoRef, videoUri.AbsolutePath, metadata, (fileData, error) =>
+            {
+                completion(fileData, error);
+                return fileData;
+            });
         }
         
         private async void uploadAsset(CryptoAsset asset, Func<Exception?, Exception?> completion)
