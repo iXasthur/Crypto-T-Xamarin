@@ -28,5 +28,8 @@
   "Password": "Password",
   "SignIn": "Sign In",
   "SignUp": "Sign Up",
-  "Authorization": "Authorization"
+  "Authorization": "Authorization",
+  "Theme": "Theme",
+  "Language": "Language",
+  "Other": "Other"
 }

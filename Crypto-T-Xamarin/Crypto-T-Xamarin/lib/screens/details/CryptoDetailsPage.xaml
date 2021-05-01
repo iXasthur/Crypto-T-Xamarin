@@ -3,14 +3,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:o="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
+             xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
              x:Class="Crypto_T_Xamarin.lib.screens.details.CryptoDetailsPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout Padding="20">
                 <Image x:Name="CryptoImage" HeightRequest="100" />
-                <Label x:Name="CryptoNameLabel" />
-                <Label x:Name="CryptoCodeLabel" />
-                <Label x:Name="CryptoDescriptionLabel" />
+                <Label Text="{localization:RL Name}" Padding="0, 20"/>
+                <Label x:Name="CryptoNameLabel" Padding="20, 0" />
+                <Label Text="{localization:RL Code}" Padding="0, 10" />
+                <Label x:Name="CryptoCodeLabel" Padding="20, 0" />
+                <Label Text="{localization:RL Description}" Padding="0, 10" />
+                <Label x:Name="CryptoDescriptionLabel" Padding="20, 0" />
+                <Label Text="{localization:RL Video}" Padding="0, 10" />
                 <StackLayout Orientation="Horizontal">
                     <o:VideoPlayer
                         x:Name="CryptoVideo"
@@ -18,9 +23,10 @@
                         HeightRequest="200"
                     />
                 </StackLayout>
-                <Label x:Name="CryptoEventLatitudeLabel"/>
-                <Label x:Name="CryptoEventLongitudeLabel" />
-                <Label x:Name="CryptoEventNoteLabel" />
+                <Label Text="{localization:RL Event}" Padding="0, 10" />
+                <Label x:Name="CryptoEventLatitudeLabel" Padding="20, 0"/>
+                <Label x:Name="CryptoEventLongitudeLabel" Padding="20, 0"/>
+                <Label x:Name="CryptoEventNoteLabel" Padding="20, 0" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

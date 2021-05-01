@@ -178,50 +178,52 @@ namespace Crypto_T_Xamarin.lib.screens.creator
 
         private void UpdateMediaUI()
         {
-            if (iconUri != null)
-            {
-                CryptoImage.Source = iconUri.Scheme == "file" ? ImageSource.FromFile(iconUri.AbsolutePath) : iconUri;
-                CryptoImage.IsVisible = true;
-                DeleteImageButton.IsVisible = true;
-            }
-            else
-            {
-                CryptoImage.Source = null;
-                CryptoImage.IsVisible = false;
-                DeleteImageButton.IsVisible = false;
-            }
+            Device.BeginInvokeOnMainThread (() => {
+                if (iconUri != null)
+                {
+                    CryptoImage.Source = iconUri.Scheme == "file" ? ImageSource.FromFile(iconUri.AbsolutePath) : iconUri;
+                    CryptoImage.IsVisible = true;
+                    DeleteImageButton.IsVisible = true;
+                }
+                else
+                {
+                    CryptoImage.Source = null;
+                    CryptoImage.IsVisible = false;
+                    DeleteImageButton.IsVisible = false;
+                }
 
-            if (videoUri != null)
-            {
-                CryptoVideo.Source = videoUri;
-                CryptoVideo.IsVisible = true;
-                DeleteVideoButton.IsVisible = true;
-            }
-            else
-            {
-                CryptoVideo.Source = null;
-                CryptoVideo.Pause();
-                CryptoVideo.IsVisible = false;
-                DeleteVideoButton.IsVisible = false;
-            }
+                if (videoUri != null)
+                {
+                    CryptoVideo.Source = videoUri;
+                    CryptoVideo.IsVisible = true;
+                    DeleteVideoButton.IsVisible = true;
+                }
+                else
+                {
+                    CryptoVideo.Source = null;
+                    CryptoVideo.Pause();
+                    CryptoVideo.IsVisible = false;
+                    DeleteVideoButton.IsVisible = false;
+                }
             
-            if (eventPosition != null)
-            {
-                EventLatitudeLabel.Text = eventPosition.Value.Latitude.ToString(CultureInfo.InvariantCulture);
-                EventLongitudeLabel.Text = eventPosition.Value.Longitude.ToString(CultureInfo.InvariantCulture);
+                if (eventPosition != null)
+                {
+                    EventLatitudeLabel.Text = eventPosition.Value.Latitude.ToString(CultureInfo.InvariantCulture);
+                    EventLongitudeLabel.Text = eventPosition.Value.Longitude.ToString(CultureInfo.InvariantCulture);
                 
-                EventLatitudeLabel.IsVisible = true;
-                EventLongitudeLabel.IsVisible = true;
-                EventNoteEntry.IsVisible = true;
-                DeleteEventButton.IsVisible = true;
-            }
-            else
-            {
-                EventLatitudeLabel.IsVisible = false;
-                EventLongitudeLabel.IsVisible = false;
-                EventNoteEntry.IsVisible = false;
-                DeleteEventButton.IsVisible = false;
-            }
+                    EventLatitudeLabel.IsVisible = true;
+                    EventLongitudeLabel.IsVisible = true;
+                    EventNoteEntry.IsVisible = true;
+                    DeleteEventButton.IsVisible = true;
+                }
+                else
+                {
+                    EventLatitudeLabel.IsVisible = false;
+                    EventLongitudeLabel.IsVisible = false;
+                    EventNoteEntry.IsVisible = false;
+                    DeleteEventButton.IsVisible = false;
+                }
+            });
         }
 
         private async void SelectImage_OnClicked(object sender, EventArgs e)

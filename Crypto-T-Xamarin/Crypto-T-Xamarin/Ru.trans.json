@@ -28,5 +28,8 @@
   "Password": "Пароль",
   "SignIn": "Вход",
   "SignUp": "Регистрация",
-  "Authorization": "Авторизация"
+  "Authorization": "Авторизация",
+  "Theme": "Тема",
+  "Language": "Язык",
+  "Other": "Другое"
 }

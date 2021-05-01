@@ -5,18 +5,21 @@
              xmlns:localization="clr-namespace:RedCorners.Forms.Localization;assembly=RedCorners.Forms.Localization"
              x:Class="Crypto_T_Xamarin.lib.screens.home.tabs.SettingsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+        <StackLayout Padding="20">
+            <Label Text="{localization:RL Theme}" Padding="0, 10"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20, 0"> 
                 <Button Text="{localization:RL Auto}" Clicked="ThemeAuto_OnClicked" HorizontalOptions="FillAndExpand" />
                 <Button Text="{localization:RL Light}" Clicked="ThemeLight_OnClicked" HorizontalOptions="FillAndExpand" />
                 <Button Text="{localization:RL Dark}" Clicked="ThemeDark_OnClicked" HorizontalOptions="FillAndExpand" />
             </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="{localization:RL Language}" Padding="0, 10"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20, 0">
                 <Button Text="{localization:RL Auto}" Clicked="LanguageAuto_OnClicked" HorizontalOptions="FillAndExpand" />
                 <Button Text="English" Clicked="LanguageEnglish_OnClicked" HorizontalOptions="FillAndExpand" />
                 <Button Text="Русский" Clicked="LanguageRussian_OnClicked" HorizontalOptions="FillAndExpand" />
             </StackLayout>
-            <Button Text="{localization:RL SignOut}" Clicked="SignOut_OnClicked" HorizontalOptions="FillAndExpand" />
+            <Label Text="{localization:RL Other}" Padding="0, 10"></Label>
+            <Button Text="{localization:RL SignOut}" Clicked="SignOut_OnClicked" HorizontalOptions="FillAndExpand" Margin="20, 0" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

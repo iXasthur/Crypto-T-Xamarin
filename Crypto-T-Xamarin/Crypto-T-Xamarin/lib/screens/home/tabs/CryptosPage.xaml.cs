@@ -65,20 +65,22 @@ namespace Crypto_T_Xamarin.lib.screens.home.tabs
                 {
                     imageUri = new Uri(asset.iconFileData.Value.downloadURL);
                 }
-                
-                cells.Add(new ImageCell
+
+                var cell = new ImageCell
                 {
                     ImageSource = ImageSource.FromUri(imageUri),
                     Text = asset.name,
                     Detail = asset.code,
                     Command = new Command(() =>
                     {
-                        Device.BeginInvokeOnMainThread (() =>
+                        Device.BeginInvokeOnMainThread(() =>
                         {
                             Navigation.PushAsync(new CryptoDetailsPage(asset));
                         });
                     })
-                });
+                };
+
+                cells.Add(cell);
             });
 
             _tableView.Root = new TableRoot

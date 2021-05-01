@@ -7,19 +7,30 @@
              x:Class="Crypto_T_Xamarin.lib.screens.creator.CryptoCreatorPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout Padding="20">
+                <Label Text="{localization:RL Name}" Padding="0, 10" />
                 <Entry x:Name="NameEntry"
                        Text=""
-                       Placeholder="{localization:RL Name}" />
+                       Placeholder="{localization:RL Name}"
+                       Margin="20, 0"
+                       />
+                <Label Text="{localization:RL Code}" Padding="0, 10" />
                 <Entry x:Name="CodeEntry"
                        Text=""
-                       Placeholder="{localization:RL Code}" />
+                       Placeholder="{localization:RL Code}"
+                       Margin="20, 0"
+                       />
+                <Label Text="{localization:RL Description}" Padding="0, 10" />
                 <Entry x:Name="DescriptionEntry"
                        Text=""
-                       Placeholder="{localization:RL Description}" />
-                <Image x:Name="CryptoImage" HeightRequest="100" />
-                <Button x:Name="SelectImageButton" Text="{localization:RL Select}" Clicked="SelectImage_OnClicked" />
-                <Button x:Name="DeleteImageButton" Text="{localization:RL Delete}" Clicked="DeleteImage_OnClicked" />
+                       Placeholder="{localization:RL Description}"
+                       Margin="20, 0"
+                       />
+                <Label Text="{localization:RL Image}" Padding="0, 10" />
+                <Image x:Name="CryptoImage" HeightRequest="100" Margin="20, 0" />
+                <Button x:Name="SelectImageButton" Text="{localization:RL Select}" Clicked="SelectImage_OnClicked" Margin="20, 0" />
+                <Button x:Name="DeleteImageButton" Text="{localization:RL Delete}" Clicked="DeleteImage_OnClicked" Margin="20, 0" />
+                <Label Text="{localization:RL Video}" Padding="0, 10" />
                 <StackLayout Orientation="Horizontal">
                     <o:VideoPlayer
                         x:Name="CryptoVideo"
@@ -27,16 +38,18 @@
                         HeightRequest="200"
                     />
                 </StackLayout>
-                <Button x:Name="SelectVideoButton" Text="{localization:RL Select}" Clicked="SelectVideo_OnClicked" />
-                <Button x:Name="DeleteVideoButton" Text="{localization:RL Delete}" Clicked="DeleteVideo_OnClicked" />
+                <Button x:Name="SelectVideoButton" Text="{localization:RL Select}" Clicked="SelectVideo_OnClicked" Margin="20, 0" />
+                <Button x:Name="DeleteVideoButton" Text="{localization:RL Delete}" Clicked="DeleteVideo_OnClicked" Margin="20, 0" />
             
-                <Label x:Name="EventLatitudeLabel"/>
-                <Label x:Name="EventLongitudeLabel"/>
+                <Label Text="{localization:RL Event}" Padding="0, 10" />
+                <Label x:Name="EventLatitudeLabel" Padding="20, 0"/>
+                <Label x:Name="EventLongitudeLabel" Padding="20, 0"/>
                 <Entry x:Name="EventNoteEntry"
                        Text=""
-                       Placeholder="{localization:RL Note}" />
-                <Button x:Name="PickLocationButton" Text="{localization:RL PickLocation}" Clicked="PickLocation_OnClicked" />
-                <Button x:Name="DeleteEventButton" Text="{localization:RL Delete}" Clicked="DeleteEvent_OnClicked" />
+                       Placeholder="{localization:RL Note}" 
+                       Margin="20, 0" />
+                <Button x:Name="PickLocationButton" Text="{localization:RL PickLocation}" Clicked="PickLocation_OnClicked" Margin="20, 0"/>
+                <Button x:Name="DeleteEventButton" Text="{localization:RL Delete}" Clicked="DeleteEvent_OnClicked" Margin="20, 0"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
