@@ -74,8 +74,8 @@
         <Style TargetType="Entry">
             <Setter Property="PlaceholderColor" Value="{
                     AppThemeBinding
-                    Light={StaticResource AppTextColorLight},
-                    Dark={StaticResource AppTextColorDark}
+                    Light=Gray,
+                    Dark=LightGray
                 }">
             </Setter>
             <Setter Property="TextColor" Value="{
